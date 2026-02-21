@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/Analytics";
 import CookieBanner from "@/components/CookieBanner";
+import BackToTop from "@/components/BackToTop";
+import StructuredData from "@/components/StructuredData";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -95,11 +97,13 @@ export default function RootLayout({
     <html lang="de" className="dark">
       <head>
         <meta name="theme-color" content="#030014" />
+        <StructuredData />
       </head>
       <body className={`${inter.variable} antialiased noise-overlay`}>
         {children}
         <Analytics />
         <CookieBanner />
+        <BackToTop />
       </body>
     </html>
   );
