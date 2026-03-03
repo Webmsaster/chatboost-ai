@@ -1,33 +1,35 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Bot, Heart } from "lucide-react";
 
-const links = {
-  Service: [
-    { label: "Features", href: "#features" },
-    { label: "Preise", href: "#preise" },
-    { label: "Roadmap", href: "#roadmap" },
-    { label: "Demo anfordern", href: "#kontakt" },
-  ],
-  Branchen: [
-    { label: "Immobilienmakler", href: "#zielgruppe" },
-    { label: "Salons & Friseure", href: "#zielgruppe" },
-    { label: "Restaurants & Cafés", href: "#zielgruppe" },
-  ],
-  Legal: [
-    { label: "Impressum", href: "/impressum" },
-    { label: "Datenschutz", href: "/datenschutz" },
-    { label: "AGB", href: "#" },
-  ],
-};
-
 export default function Footer() {
+  const t = useTranslations("Footer");
+
+  const links = {
+    [t("serviceTitle")]: [
+      { label: t("features"), href: "#features" },
+      { label: t("pricing"), href: "#preise" },
+      { label: t("roadmap"), href: "#roadmap" },
+      { label: t("requestDemo"), href: "#kontakt" },
+    ],
+    [t("industriesTitle")]: [
+      { label: t("realEstate"), href: "#zielgruppe" },
+      { label: t("salons"), href: "#zielgruppe" },
+      { label: t("restaurants"), href: "#zielgruppe" },
+    ],
+    [t("legalTitle")]: [
+      { label: t("imprint"), href: "/impressum" },
+      { label: t("privacy"), href: "/datenschutz" },
+      { label: t("terms"), href: "#" },
+    ],
+  };
+
   return (
     <footer className="relative border-t border-white/[0.06] bg-[#020010]">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
-          {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#" className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-accent-500">
@@ -40,11 +42,10 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/30">
-              Done-for-You KI-Chatbot-Service für lokale Unternehmen. Installation, Konfiguration & Wartung – alles aus einer Hand.
+              {t("description")}
             </p>
           </div>
 
-          {/* Links */}
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
               <h4 className="mb-4 text-sm font-semibold text-white/60">{category}</h4>
@@ -73,13 +74,12 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.04] pt-8 sm:flex-row">
           <p className="text-xs text-white/20">
-            &copy; {new Date().getFullYear()} ChatBoost AI. Alle Rechte vorbehalten.
+            &copy; {new Date().getFullYear()} {t("copyright")}
           </p>
           <p className="flex items-center gap-1 text-xs text-white/20">
-            Made with <Heart className="h-3 w-3 text-red-400" /> in der DACH-Region
+            {t("madeWith")} <Heart className="h-3 w-3 text-red-400" /> {t("madeIn")}
           </p>
         </div>
       </div>

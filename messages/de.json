@@ -1,0 +1,366 @@
+{
+  "Metadata": {
+    "title": "ChatBoost AI – KI-Chatbot Service für lokale Unternehmen",
+    "description": "Done-for-You AI-Chatbot-Service für Immobilienmakler, Salons & Restaurants. Installation, Konfiguration & Wartung – alles aus einer Hand.",
+    "keywords": "KI Chatbot, AI Chatbot Service, Chatbot für Unternehmen, Chatbot Immobilienmakler, Chatbot Restaurant, Chatbot Salon, KI für lokale Unternehmen, Chatbot erstellen lassen, AI Kundenservice, Chatbot Handwerk, Automatisierung Kundenservice, ChatBoost AI",
+    "ogImageAlt": "ChatBoost AI – KI-Chatbots für lokale Unternehmen"
+  },
+  "Navbar": {
+    "targetAudience": "Zielgruppe",
+    "features": "Features",
+    "pricing": "Preise",
+    "roadmap": "Roadmap",
+    "appointment": "Termin",
+    "contact": "Kontakt",
+    "freeDemo": "Kostenlose Demo"
+  },
+  "Hero": {
+    "badge": "KI-Chatbots für lokale Unternehmen",
+    "titleLine1": "Dein Business.",
+    "titleLine2": "24/7 erreichbar.",
+    "titleLine3": "Automatisiert.",
+    "description": "Wir installieren, konfigurieren und warten KI-Chatbots auf deiner Website – komplett ohne technisches Vorwissen. Mehr Leads, weniger Aufwand.",
+    "ctaPrimary": "Kostenlose Demo anfordern",
+    "ctaSecondary": "Pakete ansehen",
+    "statAvailability": "Erreichbarkeit",
+    "statLeads": "Mehr Leads",
+    "statResponseTime": "Antwortzeit",
+    "chatMsg1": "Hallo! Wie kann ich Ihnen helfen? 👋",
+    "chatMsg2": "Ich möchte einen Termin buchen",
+    "chatMsg3": "Natürlich! Wann passt es Ihnen? Ich habe morgen um 14:00 und 16:00 Uhr frei.",
+    "chatMsg4": "16:00 Uhr bitte!",
+    "chatMsg5": "Perfekt! Ihr Termin ist für morgen 16:00 Uhr bestätigt ✅"
+  },
+  "TargetAudience": {
+    "badge": "Zielgruppe",
+    "title": "Für wen ist das",
+    "titleHighlight": "perfekt?",
+    "description": "Lokale Unternehmen, die Kunden gewinnen und ihre Erreichbarkeit auf 24/7 erweitern wollen.",
+    "problemLabel": "Problem",
+    "solutionLabel": "Lösung",
+    "realEstate": {
+      "title": "Immobilienmakler",
+      "problem": "Leads gehen verloren, kein 24/7-Service",
+      "solution": "Bot qualifiziert Leads automatisch und bucht Besichtigungstermine",
+      "stats": "+340% mehr qualifizierte Leads"
+    },
+    "salon": {
+      "title": "Salons & Friseure",
+      "problem": "Telefon klingelt ständig, Termine werden vergessen",
+      "solution": "Bot nimmt Terminbuchungen an und sendet automatische Reminder",
+      "stats": "87% weniger No-Shows"
+    },
+    "restaurant": {
+      "title": "Restaurants & Cafés",
+      "problem": "Reservierungen, Tischfragen, Speisekarte – immer die gleichen Fragen",
+      "solution": "Bot beantwortet FAQs und nimmt Reservierungen rund um die Uhr entgegen",
+      "stats": "60% weniger Telefonanrufe"
+    }
+  },
+  "Features": {
+    "badge": "Features",
+    "title": "Alles was du",
+    "titleHighlight": "brauchst",
+    "description": "Von der Installation bis zum Reporting – wir kümmern uns um alles.",
+    "websiteIntegration": {
+      "title": "Website-Integration",
+      "description": "Widget-Code per Copy/Paste in jede Website einbetten – in unter 5 Minuten live."
+    },
+    "appointmentBooking": {
+      "title": "Terminbuchung",
+      "description": "Nahtlose Integration mit Calendly oder Cal.com für automatische Terminvergabe."
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "Monatliches Reporting mit Leads, Conversions und Chat-Statistiken."
+    },
+    "whatsapp": {
+      "title": "WhatsApp Integration",
+      "description": "Dein Chatbot auch auf WhatsApp – dort wo deine Kunden schon sind."
+    },
+    "gdpr": {
+      "title": "DSGVO-konform",
+      "description": "Datenschutz nach europäischen Standards. Daten bleiben sicher."
+    },
+    "gpt": {
+      "title": "GPT-4o Powered",
+      "description": "Neueste KI-Technologie für natürliche, menschenähnliche Konversationen."
+    },
+    "multilingual": {
+      "title": "Mehrsprachig",
+      "description": "Chatbot spricht Deutsch & Englisch – perfekt für internationale Kunden."
+    },
+    "leadScoring": {
+      "title": "Lead-Scoring",
+      "description": "Automatische Qualifizierung: Erkenne sofort deine besten Leads."
+    }
+  },
+  "TechStack": {
+    "badge": "Tech Stack",
+    "title": "Unsere",
+    "titleHighlight": "Tools",
+    "description": "Bewährte Tools, die zuverlässig zusammenarbeiten.",
+    "chatbase": { "category": "Chatbot-Builder", "cost": "Free Tier" },
+    "openai": { "category": "KI-Backend", "cost": "~$0.01/1k Tokens" },
+    "calendly": { "category": "Terminbuchung", "cost": "Free/Paid" },
+    "hubspot": { "category": "CRM", "cost": "Kostenlos" },
+    "widget": { "category": "Website-Embed", "cost": "—" },
+    "stripe": { "category": "Zahlungen", "cost": "1.4% + 0.25€" },
+    "notion": { "category": "Projektmanagement", "cost": "Free" }
+  },
+  "BlogPreview": {
+    "badge": "Blog",
+    "title": "Aktuelle",
+    "titleHighlight": "Insights",
+    "description": "Tipps und Strategien rund um KI-Chatbots für dein Unternehmen.",
+    "readAll": "Alle Artikel lesen"
+  },
+  "Pricing": {
+    "badge": "Preise",
+    "title": "Transparent &",
+    "titleHighlight": "fair",
+    "description": "Einmalige Einrichtung + monatlicher Retainer. Keine versteckten Kosten.",
+    "popular": "Beliebtestes Paket",
+    "oneTime": "einmalig",
+    "perMonth": "/Monat",
+    "cta": "Jetzt starten",
+    "tipLabel": "Tipp:",
+    "tipText": "10 Pro-Kunden = {amount} passives Einkommen – nur durch Retainer!",
+    "tipAmount": "1.490 €/Monat",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfekt zum Einstieg. Dein erster KI-Chatbot live auf deiner Website.",
+      "feature1": "Chatbot-Installation auf der Website",
+      "feature2": "5 angepasste FAQ-Antworten",
+      "feature3": "Kontaktformular-Integration",
+      "feature4": "E-Mail-Benachrichtigung bei Leads",
+      "feature5": "1x monatlicher Review-Call (30 Min.)"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Für Unternehmen, die wachsen wollen. Volle Automatisierung.",
+      "feature1": "Alles aus Starter",
+      "feature2": "Terminbuchungs-Integration (Calendly / Cal.com)",
+      "feature3": "CRM-Anbindung (z.B. HubSpot)",
+      "feature4": "WhatsApp-Integration",
+      "feature5": "Bis zu 20 angepasste Flows",
+      "feature6": "Monatliches Reporting-Dashboard"
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Die Komplett-Lösung. Dein digitaler Top-Mitarbeiter.",
+      "feature1": "Alles aus Pro",
+      "feature2": "Individuelle KI-Persona (Name, Ton, Avatar)",
+      "feature3": "Mehrsprachiger Bot (DE/EN)",
+      "feature4": "Lead-Scoring & auto. Qualifizierung",
+      "feature5": "Priority Support (24h Response)",
+      "feature6": "Quartals-Strategie-Call"
+    }
+  },
+  "Testimonials": {
+    "badge": "Kundenstimmen",
+    "title": "Was unsere Kunden",
+    "titleHighlight": "sagen",
+    "description": "Echte Ergebnisse von lokalen Unternehmen, die mit ChatBoost AI gewachsen sind.",
+    "testimonial1": {
+      "name": "Sandra Meier",
+      "role": "Inhaberin, Salon Haarscharf · Wien",
+      "text": "Seit wir den Chatbot haben, klingelt das Telefon kaum noch – aber die Terminbücher sind voller als je zuvor. Unsere Kunden lieben es, rund um die Uhr buchen zu können.",
+      "result": "87% weniger No-Shows"
+    },
+    "testimonial2": {
+      "name": "Thomas Kramer",
+      "role": "Immobilienmakler · München",
+      "text": "Der Bot qualifiziert meine Leads automatisch und bucht Besichtigungstermine, während ich schlafe. Nach 3 Monaten will ich nicht mehr ohne.",
+      "result": "3x mehr qualifizierte Leads"
+    },
+    "testimonial3": {
+      "name": "Marco Rossi",
+      "role": "Inhaber, Trattoria Rossi · Salzburg",
+      "text": "Endlich muss mein Team nicht mehr ständig ans Telefon. Der Chatbot nimmt Reservierungen an und beantwortet Fragen zur Speisekarte – fehlerfrei und freundlich.",
+      "result": "60% weniger Anrufe"
+    },
+    "stat1Label": "Aktive Kunden",
+    "stat2Label": "Durchschnittsbewertung",
+    "stat3Label": "Weiterempfehlungsrate"
+  },
+  "FAQ": {
+    "badge": "FAQ",
+    "title": "Häufige",
+    "titleHighlight": "Fragen",
+    "description": "Alles was du wissen musst, bevor du startest.",
+    "q1": "Brauche ich technisches Vorwissen?",
+    "a1": "Nein, überhaupt nicht. Wir kümmern uns um alles – von der Konfiguration bis zur Installation. Du bekommst einen fertigen Widget-Code, den du per Copy/Paste in deine Website einbaust. Das dauert unter 5 Minuten.",
+    "q2": "Wie lange dauert die Einrichtung?",
+    "a2": "In der Regel 24–48 Stunden. Nach einem kurzen Briefing-Call konfigurieren wir deinen Bot und liefern ihn fertig aus. Die Integration in deine Website ist dann in wenigen Minuten erledigt.",
+    "q3": "Ist das DSGVO-konform?",
+    "a3": "Ja, zu 100%. Alle Daten werden nach europäischen Datenschutzstandards verarbeitet. Wir setzen auf sichere Server und transparente Datenverarbeitung. Ein entsprechender Hinweis wird im Chat-Widget angezeigt.",
+    "q4": "Kann ich den Bot an mein Unternehmen anpassen?",
+    "a4": "Absolut. Wir passen Ton, Sprache und Antworten individuell an dein Unternehmen an. Im Premium-Paket bekommt dein Bot sogar einen eigenen Namen, Avatar und eine individuelle Persona.",
+    "q5": "Was passiert, wenn der Bot eine Frage nicht beantworten kann?",
+    "a5": "Der Bot erkennt, wenn er an seine Grenzen stößt, und leitet die Anfrage automatisch an dich weiter – per E-Mail oder direkt in dein CRM. So geht kein Lead verloren.",
+    "q6": "Kann ich den Service jederzeit kündigen?",
+    "a6": "Ja. Unsere Verträge sind monatlich kündbar, ohne Mindestlaufzeit. Wir sind überzeugt, dass du bleibst, weil du zufrieden bist – nicht weil du musst."
+  },
+  "Revenue": {
+    "badge": "Umsatzprognose",
+    "title": "Konservative",
+    "titleHighlight": "Prognose",
+    "description": "Realistische Umsatzentwicklung basierend auf dem Pro-Paket.",
+    "totalRevenue": "Gesamtumsatz",
+    "customers": "Kunden",
+    "retainer": "Retainer",
+    "oneTime": "Einmalig",
+    "month1": "Monat 1",
+    "month3": "Monat 3",
+    "month6": "Monat 6",
+    "month12": "Monat 12"
+  },
+  "Roadmap": {
+    "badge": "90-Tage Plan",
+    "title": "Deine",
+    "titleHighlight": "Launch-Roadmap",
+    "description": "In 90 Tagen von Null auf profitables Chatbot-Business.",
+    "phase1": {
+      "month": "Monat 1",
+      "title": "Fundament",
+      "item1": "Tech Stack einrichten (Chatbase, Calendly, Stripe)",
+      "item2": "3 Demo-Bots erstellen (Makler, Salon, Restaurant)",
+      "item3": "Landing Page erstellen",
+      "item4": "Erste 10 Kaltakquise-Nachrichten senden",
+      "item5": "1–2 kostenlose Test-Kunden gewinnen"
+    },
+    "phase2": {
+      "month": "Monat 2",
+      "title": "Erste Umsätze",
+      "item1": "Erstes bezahltes Paket abschließen",
+      "item2": "Prozess dokumentieren (SOP für Bot-Setup)",
+      "item3": "Testimonial/Case Study einholen",
+      "item4": "Instagram/LinkedIn Content starten"
+    },
+    "phase3": {
+      "month": "Monat 3",
+      "title": "Skalierung",
+      "item1": "5+ bezahlte Kunden",
+      "item2": "Erste Google Ads Kampagne (50–100 € Budget)",
+      "item3": "Retainer-Modell fest etablieren",
+      "item4": "Preise anpassen / Upsell anbieten"
+    }
+  },
+  "Booking": {
+    "badge": "Termin buchen",
+    "title": "Lass uns",
+    "titleHighlight": "sprechen",
+    "description": "Buche dir ein unverbindliches Erstgespräch und erfahre, wie ein KI-Chatbot dein Unternehmen voranbringt – in nur 15 Minuten.",
+    "alternativeTitle": "Oder schreib uns direkt",
+    "alternativeDescription": "Du möchtest lieber direkt Kontakt aufnehmen? Kein Problem – wir sind für dich da.",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "responseTime": "Antwortzeit: In der Regel innerhalb von 24 Stunden.",
+    "calendarLoading": "Kalender wird geladen..."
+  },
+  "Contact": {
+    "badge": "Kontakt",
+    "title": "Kostenlose",
+    "titleHighlight": "Demo",
+    "titleSuffix": "anfordern",
+    "description": "Wir bauen dir einen Demo-Bot – kostenlos und unverbindlich. Gefällt er dir, reden wir weiter.",
+    "talkTitle": "Lass uns sprechen",
+    "talkDescription": "Schreib uns oder ruf an – wir melden uns innerhalb von 24 Stunden.",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "locationLabel": "Standort",
+    "locationValue": "DACH-Region",
+    "badge1": "DSGVO-konform",
+    "badge2": "Keine Vertragsbindung",
+    "badge3": "Kostenlose Demo",
+    "formName": "Name",
+    "formNamePlaceholder": "Max Mustermann",
+    "formEmail": "E-Mail",
+    "formEmailPlaceholder": "max@beispiel.de",
+    "formIndustry": "Branche",
+    "formIndustryPlaceholder": "Bitte wählen...",
+    "formIndustryRealEstate": "Immobilienmakler",
+    "formIndustrySalon": "Salon / Friseur",
+    "formIndustryRestaurant": "Restaurant / Café",
+    "formIndustryOther": "Andere Branche",
+    "formWebsite": "Website-URL",
+    "formWebsitePlaceholder": "https://deine-website.de",
+    "formMessage": "Nachricht",
+    "formMessagePlaceholder": "Erzähl uns kurz, was du brauchst...",
+    "formSubmit": "Kostenlose Demo anfordern",
+    "formSubmitting": "Wird gesendet...",
+    "formSuccessTitle": "Nachricht gesendet!",
+    "formSuccessDescription": "Wir melden uns innerhalb von 24 Stunden bei dir.",
+    "formErrorGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "formErrorNetwork": "Netzwerkfehler – bitte prüfe deine Internetverbindung und versuche es erneut.",
+    "formSubject": "Neue ChatBoost AI Anfrage"
+  },
+  "Footer": {
+    "description": "Done-for-You KI-Chatbot-Service für lokale Unternehmen. Installation, Konfiguration & Wartung – alles aus einer Hand.",
+    "serviceTitle": "Service",
+    "features": "Features",
+    "pricing": "Preise",
+    "roadmap": "Roadmap",
+    "requestDemo": "Demo anfordern",
+    "industriesTitle": "Branchen",
+    "realEstate": "Immobilienmakler",
+    "salons": "Salons & Friseure",
+    "restaurants": "Restaurants & Cafés",
+    "legalTitle": "Legal",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "copyright": "ChatBoost AI. Alle Rechte vorbehalten.",
+    "madeWith": "Made with",
+    "madeIn": "in der DACH-Region"
+  },
+  "CookieBanner": {
+    "text": "Wir nutzen Cookies und Analytics, um dir die beste Erfahrung zu bieten und unsere Website zu verbessern.",
+    "learnMore": "Mehr erfahren",
+    "decline": "Ablehnen",
+    "accept": "Akzeptieren"
+  },
+  "ChatWidget": {
+    "greeting": "Hallo! 👋 Ich bin der ChatBoost AI Demo-Bot. Wie kann ich dir helfen?",
+    "quickReply1": "Was kostet das?",
+    "quickReply2": "Wie funktioniert das?",
+    "quickReply3": "Demo anfordern",
+    "inputPlaceholder": "Nachricht schreiben...",
+    "demoHint": "Dies ist eine Demo – dein Bot wird individuell angepasst",
+    "responseCost": "Unsere Pakete starten ab 399€ einmalig + 79€/Monat. Das Pro-Paket mit Terminbuchung und WhatsApp kostet 799€ + 149€/Monat. Soll ich dir mehr Details zeigen?",
+    "responseHow": "Ganz einfach: 1) Du sagst uns, was dein Bot können soll. 2) Wir konfigurieren alles für dich. 3) Du bekommst einen Widget-Code für deine Website. Fertig! Alles in unter 48h.",
+    "responseDemo": "Super! Scroll einfach nach unten zum Kontaktformular oder schreib uns direkt an info@chatboost-ai.de. Wir bauen dir kostenlos einen Demo-Bot!",
+    "responseFallback": "Gute Frage! Damit ich dir die beste Antwort geben kann, kontaktiere uns gerne direkt über das Formular unten oder buche einen kostenlosen Beratungscall. Wir melden uns innerhalb von 24 Stunden!",
+    "responsePrice": "Wir bieten drei Pakete an: Starter (399€ + 79€/Monat), Pro (799€ + 149€/Monat) und Premium (1.499€ + 249€/Monat). Das Pro-Paket ist am beliebtesten! Scroll nach unten zu 'Preise' für alle Details.",
+    "responseAppointment": "Gerne! Du kannst dir direkt einen kostenlosen 15-Min-Call buchen. Scroll einfach runter zum Bereich 'Termin buchen' – da findest du unseren Kalender.",
+    "responseWhatsApp": "Ja, unser Pro- und Premium-Paket beinhaltet WhatsApp-Integration! Dein Chatbot ist dann nicht nur auf deiner Website, sondern auch auf WhatsApp erreichbar.",
+    "responseGDPR": "Datenschutz ist uns sehr wichtig. Alle unsere Chatbots sind DSGVO-konform. Die Daten werden sicher verarbeitet und wir halten uns strikt an europäische Datenschutzstandards.",
+    "responseRealEstate": "Für Immobilienmakler sind unsere Bots besonders effektiv: automatische Lead-Qualifizierung, Besichtigungstermine buchen und 24/7 Erreichbarkeit. Bis zu 340% mehr qualifizierte Leads!",
+    "responseRestaurant": "Für Restaurants perfekt: automatische Reservierungen, Speisekarten-Infos, Allergene-Auskunft und Öffnungszeiten – alles rund um die Uhr. Bis zu 60% weniger Telefonanrufe!",
+    "responseSalon": "Salons & Friseure lieben unsere Bots: Termine werden automatisch gebucht, Erinnerungen verschickt und No-Shows um bis zu 87% reduziert!",
+    "responseDuration": "Von der Beauftragung bis zum fertigen Bot dauert es in der Regel 24–48 Stunden. Die Integration in deine Website ist dann in unter 5 Minuten erledigt!",
+    "responseGreeting": "Hallo! Schön, dass du da bist! Wie kann ich dir helfen? Du kannst mich alles rund um unsere KI-Chatbot-Services fragen.",
+    "responseThanks": "Gerne! Wenn du noch Fragen hast, bin ich hier. Oder scroll einfach runter zum Kontaktformular, um direkt mit unserem Team zu sprechen."
+  },
+  "NotFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert leider nicht. Vielleicht wurde sie verschoben oder der Link ist fehlerhaft.",
+    "backHome": "Zur Startseite",
+    "readBlog": "Blog lesen"
+  },
+  "BlogPage": {
+    "badge": "Blog",
+    "title": "Insights &",
+    "titleHighlight": "Tipps",
+    "description": "Praxiswissen rund um KI-Chatbots, Leadgenerierung und Automatisierung für lokale Unternehmen.",
+    "comingSoon": "Demnächst mehr Artikel...",
+    "back": "Zurück",
+    "allArticles": "Alle Artikel",
+    "backToArticles": "Zurück zu allen Artikeln",
+    "ctaTitle": "Bereit für deinen eigenen KI-Chatbot?",
+    "ctaDescription": "Fordere jetzt eine kostenlose Demo an und sieh selbst, wie ein Chatbot dein Business voranbringt.",
+    "ctaButton": "Kostenlose Demo anfordern",
+    "articleNotFound": "Artikel nicht gefunden"
+  }
+}

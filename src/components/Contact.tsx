@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, Mail, Phone, MapPin, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Contact() {
   const ref = useRef(null);
@@ -10,9 +11,9 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations("Contact");
 
-  // TODO: Ersetze "xyzplaceholder" mit deiner echten Formspree Form-ID
-  const FORMSPREE_URL = "https://formspree.io/f/xyzplaceholder";
+  const FORMSPREE_URL = "https://formspree.io/f/mwvnzbdl";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +21,6 @@ export default function Contact() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    // Formspree _replyto: damit Antworten direkt an den Absender gehen
     const email = formData.get("email");
     if (email) formData.set("_replyto", email.toString());
 
@@ -28,9 +28,7 @@ export default function Contact() {
       const response = await fetch(FORMSPREE_URL, {
         method: "POST",
         body: formData,
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
@@ -40,11 +38,11 @@ export default function Contact() {
         if (data?.errors) {
           setError(data.errors.map((err: { message: string }) => err.message).join(", "));
         } else {
-          setError("Etwas ist schiefgelaufen. Bitte versuche es erneut.");
+          setError(t("formErrorGeneric"));
         }
       }
     } catch {
-      setError("Netzwerkfehler – bitte prüfe deine Internetverbindung und versuche es erneut.");
+      setError(t("formErrorNetwork"));
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +53,6 @@ export default function Contact() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-900/5 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -63,18 +60,17 @@ export default function Contact() {
           className="text-center"
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/5 px-4 py-1.5 text-sm text-brand-300">
-            Kontakt
+            {t("badge")}
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Kostenlose <span className="text-gradient">Demo</span> anfordern
+            {t("title")} <span className="text-gradient">{t("titleHighlight")}</span> {t("titleSuffix")}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/40">
-            Wir bauen dir einen Demo-Bot – kostenlos und unverbindlich. Gefällt er dir, reden wir weiter.
+            {t("description")}
           </p>
         </motion.div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-5">
-          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -82,17 +78,15 @@ export default function Contact() {
             className="space-y-8 lg:col-span-2"
           >
             <div>
-              <h3 className="text-xl font-bold text-white">Lass uns sprechen</h3>
-              <p className="mt-2 text-sm text-white/40">
-                Schreib uns oder ruf an – wir melden uns innerhalb von 24 Stunden.
-              </p>
+              <h3 className="text-xl font-bold text-white">{t("talkTitle")}</h3>
+              <p className="mt-2 text-sm text-white/40">{t("talkDescription")}</p>
             </div>
 
             <div className="space-y-4">
               {[
-                { icon: Mail, label: "E-Mail", value: "hello@chatboost-ai.de" },
-                { icon: Phone, label: "Telefon", value: "+49 123 456 7890" },
-                { icon: MapPin, label: "Standort", value: "DACH-Region" },
+                { icon: Mail, label: t("emailLabel"), value: "info@chatboost-ai.de" },
+                { icon: Phone, label: t("phoneLabel"), value: "+49 176 4751 1466" },
+                { icon: MapPin, label: t("locationLabel"), value: t("locationValue") },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -109,9 +103,8 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Trust badges */}
             <div className="flex flex-wrap gap-3">
-              {["DSGVO-konform", "Keine Vertragsbindung", "Kostenlose Demo"].map((badge) => (
+              {[t("badge1"), t("badge2"), t("badge3")].map((badge) => (
                 <div
                   key={badge}
                   className="inline-flex items-center gap-1.5 rounded-lg border border-green-500/10 bg-green-500/5 px-3 py-1.5 text-xs text-green-400"
@@ -123,7 +116,6 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -140,73 +132,70 @@ export default function Contact() {
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
                     <CheckCircle2 className="h-8 w-8 text-green-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Nachricht gesendet!</h3>
-                  <p className="mt-2 text-sm text-white/40">
-                    Wir melden uns innerhalb von 24 Stunden bei dir.
-                  </p>
+                  <h3 className="text-xl font-bold text-white">{t("formSuccessTitle")}</h3>
+                  <p className="mt-2 text-sm text-white/40">{t("formSuccessDescription")}</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} method="POST" className="space-y-5">
-                  <input type="hidden" name="_subject" value="Neue ChatBoost AI Anfrage" />
+                  <input type="hidden" name="_subject" value={t("formSubject")} />
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="mb-1.5 block text-sm font-medium text-white/50">Name</label>
+                      <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formName")}</label>
                       <input
                         type="text"
                         name="name"
                         required
-                        placeholder="Max Mustermann"
+                        placeholder={t("formNamePlaceholder")}
                         className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
                       />
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-sm font-medium text-white/50">E-Mail</label>
+                      <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formEmail")}</label>
                       <input
                         type="email"
                         name="email"
                         required
-                        placeholder="max@beispiel.de"
+                        placeholder={t("formEmailPlaceholder")}
                         className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">Branche</label>
+                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formIndustry")}</label>
                     <select
                       name="branche"
                       required
                       className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/70 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
                     >
-                      <option value="" className="bg-[#0c0c1d]">Bitte wählen...</option>
-                      <option value="immobilien" className="bg-[#0c0c1d]">Immobilienmakler</option>
-                      <option value="salon" className="bg-[#0c0c1d]">Salon / Friseur</option>
-                      <option value="restaurant" className="bg-[#0c0c1d]">Restaurant / Café</option>
-                      <option value="andere" className="bg-[#0c0c1d]">Andere Branche</option>
+                      <option value="" className="bg-[#0c0c1d]">{t("formIndustryPlaceholder")}</option>
+                      <option value="immobilien" className="bg-[#0c0c1d]">{t("formIndustryRealEstate")}</option>
+                      <option value="salon" className="bg-[#0c0c1d]">{t("formIndustrySalon")}</option>
+                      <option value="restaurant" className="bg-[#0c0c1d]">{t("formIndustryRestaurant")}</option>
+                      <option value="andere" className="bg-[#0c0c1d]">{t("formIndustryOther")}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">Website-URL</label>
+                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formWebsite")}</label>
                     <input
                       type="url"
                       name="website"
-                      placeholder="https://deine-website.de"
+                      placeholder={t("formWebsitePlaceholder")}
                       className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">Nachricht</label>
+                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formMessage")}</label>
                     <textarea
                       name="nachricht"
                       rows={4}
-                      placeholder="Erzähl uns kurz, was du brauchst..."
+                      placeholder={t("formMessagePlaceholder")}
                       className="w-full resize-none rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
                     />
                   </div>
 
-                  {/* Fehlermeldung */}
                   {error && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
@@ -225,12 +214,12 @@ export default function Contact() {
                   >
                     {isLoading ? (
                       <>
-                        Wird gesendet...
+                        {t("formSubmitting")}
                         <Loader2 className="h-4 w-4 animate-spin" />
                       </>
                     ) : (
                       <>
-                        Kostenlose Demo anfordern
+                        {t("formSubmit")}
                         <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </>
                     )}

@@ -2,17 +2,30 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Bot, ArrowLeft, Clock, Calendar } from "lucide-react";
-import { blogPosts } from "@/data/blog-posts";
+import { useEffect, useState } from "react";
+import type { BlogPost } from "@/data/blog-posts";
 
 export default function BlogPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const t = useTranslations("BlogPage");
+  const locale = useLocale();
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    async function loadPosts() {
+      const { getBlogPosts } = await import("@/data/blog-posts");
+      const data = await getBlogPosts(locale as "de" | "en");
+      setPosts(data);
+    }
+    loadPosts();
+  }, [locale]);
 
   return (
     <div className="min-h-screen bg-[#030014]">
-      {/* Navbar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -37,18 +50,15 @@ export default function BlogPage() {
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-white/60 transition-all hover:bg-white/5 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
-            Zurück
+            {t("back")}
           </Link>
         </div>
       </motion.nav>
 
-      {/* Content */}
       <main className="relative pt-32 pb-24" ref={ref}>
-        {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-500/[0.03] via-transparent to-transparent" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -56,21 +66,19 @@ export default function BlogPage() {
             className="text-center"
           >
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/5 px-4 py-1.5 text-sm text-brand-300">
-              Blog
+              {t("badge")}
             </div>
             <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              Insights &{" "}
-              <span className="text-gradient">Tipps</span>
+              {t("title")}{" "}
+              <span className="text-gradient">{t("titleHighlight")}</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/40">
-              Praxiswissen rund um KI-Chatbots, Leadgenerierung und
-              Automatisierung für lokale Unternehmen.
+              {t("description")}
             </p>
           </motion.div>
 
-          {/* Blog Grid */}
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post, i) => (
+            {posts.map((post, i) => (
               <motion.article
                 key={post.slug}
                 initial={{ opacity: 0, y: 40 }}
@@ -81,28 +89,19 @@ export default function BlogPage() {
                   href={`/blog/${post.slug}`}
                   className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-300 hover:bg-white/[0.04] hover:border-brand-500/20 hover:shadow-lg hover:shadow-brand-500/5"
                 >
-                  {/* Gradient stripe top */}
                   <div className="h-1 w-full bg-gradient-to-r from-brand-500 to-accent-500" />
-
                   <div className="flex flex-1 flex-col p-6">
-                    {/* Category badge */}
                     <div className="mb-4">
                       <span className="inline-flex items-center rounded-full border border-accent-500/20 bg-accent-500/5 px-3 py-1 text-xs font-medium text-accent-400">
                         {post.category}
                       </span>
                     </div>
-
-                    {/* Title */}
                     <h2 className="mb-3 text-lg font-semibold leading-snug text-white transition-colors group-hover:text-brand-200">
                       {post.title}
                     </h2>
-
-                    {/* Description */}
                     <p className="mb-6 flex-1 text-sm leading-relaxed text-white/40">
                       {post.description}
                     </p>
-
-                    {/* Footer */}
                     <div className="flex items-center gap-4 border-t border-white/[0.06] pt-4 text-xs text-white/30">
                       <span className="flex items-center gap-1.5">
                         <Calendar className="h-3.5 w-3.5" />
@@ -119,7 +118,6 @@ export default function BlogPage() {
             ))}
           </div>
 
-          {/* Coming soon hint */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -128,7 +126,7 @@ export default function BlogPage() {
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-6 py-3 text-sm text-white/30">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse" />
-              Demnächst mehr Artikel...
+              {t("comingSoon")}
             </div>
           </motion.div>
         </div>

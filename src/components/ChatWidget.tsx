@@ -3,85 +3,81 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Message = { role: "bot" | "user"; text: string };
 
-const demoMessages: Message[] = [
-  { role: "bot", text: "Hallo! 👋 Ich bin der ChatBoost AI Demo-Bot. Wie kann ich dir helfen?" },
-];
-
-const quickReplies = [
-  "Was kostet das?",
-  "Wie funktioniert das?",
-  "Demo anfordern",
-];
-
-const exactResponses: Record<string, string> = {
-  "Was kostet das?": "Unsere Pakete starten ab 399€ einmalig + 79€/Monat. Das Pro-Paket mit Terminbuchung und WhatsApp kostet 799€ + 149€/Monat. Soll ich dir mehr Details zeigen?",
-  "Wie funktioniert das?": "Ganz einfach: 1) Du sagst uns, was dein Bot können soll. 2) Wir konfigurieren alles für dich. 3) Du bekommst einen Widget-Code für deine Website. Fertig! Alles in unter 48h.",
-  "Demo anfordern": "Super! Scroll einfach nach unten zum Kontaktformular oder schreib uns direkt an info@chatboost-ai.de. Wir bauen dir kostenlos einen Demo-Bot!",
-};
-
-const keywordResponses: { keywords: string[]; response: string }[] = [
-  {
-    keywords: ["preis", "kosten", "teuer", "günstig", "paket", "tarif", "euro", "€"],
-    response: "Wir bieten drei Pakete an: Starter (399€ + 79€/Monat), Pro (799€ + 149€/Monat) und Premium (1.499€ + 249€/Monat). Das Pro-Paket ist am beliebtesten! Scroll nach unten zu 'Preise' für alle Details.",
-  },
-  {
-    keywords: ["termin", "buchen", "gespräch", "call", "beratung"],
-    response: "Gerne! Du kannst dir direkt einen kostenlosen 15-Min-Call buchen. Scroll einfach runter zum Bereich 'Termin buchen' – da findest du unseren Kalender.",
-  },
-  {
-    keywords: ["whatsapp", "messenger", "instagram"],
-    response: "Ja, unser Pro- und Premium-Paket beinhaltet WhatsApp-Integration! Dein Chatbot ist dann nicht nur auf deiner Website, sondern auch auf WhatsApp erreichbar.",
-  },
-  {
-    keywords: ["dsgvo", "datenschutz", "daten", "sicher"],
-    response: "Datenschutz ist uns sehr wichtig. Alle unsere Chatbots sind DSGVO-konform. Die Daten werden sicher verarbeitet und wir halten uns strikt an europäische Datenschutzstandards.",
-  },
-  {
-    keywords: ["immobilie", "makler", "wohnung", "haus"],
-    response: "Für Immobilienmakler sind unsere Bots besonders effektiv: automatische Lead-Qualifizierung, Besichtigungstermine buchen und 24/7 Erreichbarkeit. Bis zu 340% mehr qualifizierte Leads!",
-  },
-  {
-    keywords: ["restaurant", "gastro", "reservier", "tisch"],
-    response: "Für Restaurants perfekt: automatische Reservierungen, Speisekarten-Infos, Allergene-Auskunft und Öffnungszeiten – alles rund um die Uhr. Bis zu 60% weniger Telefonanrufe!",
-  },
-  {
-    keywords: ["salon", "friseur", "frisör", "haar", "beauty"],
-    response: "Salons & Friseure lieben unsere Bots: Termine werden automatisch gebucht, Erinnerungen verschickt und No-Shows um bis zu 87% reduziert!",
-  },
-  {
-    keywords: ["wie lange", "dauer", "schnell", "zeit"],
-    response: "Von der Beauftragung bis zum fertigen Bot dauert es in der Regel 24–48 Stunden. Die Integration in deine Website ist dann in unter 5 Minuten erledigt!",
-  },
-  {
-    keywords: ["hallo", "hi", "hey", "moin", "servus", "guten tag"],
-    response: "Hallo! Schön, dass du da bist! Wie kann ich dir helfen? Du kannst mich alles rund um unsere KI-Chatbot-Services fragen.",
-  },
-  {
-    keywords: ["danke", "super", "toll", "cool", "perfekt"],
-    response: "Gerne! Wenn du noch Fragen hast, bin ich hier. Oder scroll einfach runter zum Kontaktformular, um direkt mit unserem Team zu sprechen.",
-  },
-];
-
-function findResponse(input: string): string {
-  if (exactResponses[input]) return exactResponses[input];
-
-  const lower = input.toLowerCase();
-  for (const entry of keywordResponses) {
-    if (entry.keywords.some((kw) => lower.includes(kw))) {
-      return entry.response;
-    }
-  }
-
-  return "Gute Frage! Damit ich dir die beste Antwort geben kann, kontaktiere uns gerne direkt über das Formular unten oder buche einen kostenlosen Beratungscall. Wir melden uns innerhalb von 24 Stunden!";
-}
-
 export default function ChatWidget() {
+  const t = useTranslations("ChatWidget");
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(demoMessages);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "bot", text: t("greeting") },
+  ]);
   const [input, setInput] = useState("");
+
+  const quickReplies = [t("quickReply1"), t("quickReply2"), t("quickReply3")];
+
+  const exactResponses: Record<string, string> = {
+    [t("quickReply1")]: t("responseCost"),
+    [t("quickReply2")]: t("responseHow"),
+    [t("quickReply3")]: t("responseDemo"),
+  };
+
+  const keywordResponses: { keywords: string[]; response: string }[] = [
+    {
+      keywords: ["preis", "kosten", "teuer", "günstig", "paket", "tarif", "euro", "€", "price", "cost", "cheap", "package"],
+      response: t("responsePrice"),
+    },
+    {
+      keywords: ["termin", "buchen", "gespräch", "call", "beratung", "appointment", "book", "consultation"],
+      response: t("responseAppointment"),
+    },
+    {
+      keywords: ["whatsapp", "messenger", "instagram"],
+      response: t("responseWhatsApp"),
+    },
+    {
+      keywords: ["dsgvo", "datenschutz", "daten", "sicher", "gdpr", "privacy", "data", "secure"],
+      response: t("responseGDPR"),
+    },
+    {
+      keywords: ["immobilie", "makler", "wohnung", "haus", "real estate", "property", "agent"],
+      response: t("responseRealEstate"),
+    },
+    {
+      keywords: ["restaurant", "gastro", "reservier", "tisch", "table", "reservation"],
+      response: t("responseRestaurant"),
+    },
+    {
+      keywords: ["salon", "friseur", "frisör", "haar", "beauty", "barber", "hair"],
+      response: t("responseSalon"),
+    },
+    {
+      keywords: ["wie lange", "dauer", "schnell", "zeit", "how long", "duration", "fast", "time"],
+      response: t("responseDuration"),
+    },
+    {
+      keywords: ["hallo", "hi", "hey", "moin", "servus", "guten tag", "hello", "good morning"],
+      response: t("responseGreeting"),
+    },
+    {
+      keywords: ["danke", "super", "toll", "cool", "perfekt", "thanks", "great", "awesome", "perfect"],
+      response: t("responseThanks"),
+    },
+  ];
+
+  function findResponse(userInput: string): string {
+    if (exactResponses[userInput]) return exactResponses[userInput];
+
+    const lower = userInput.toLowerCase();
+    for (const entry of keywordResponses) {
+      if (entry.keywords.some((kw) => lower.includes(kw))) {
+        return entry.response;
+      }
+    }
+
+    return t("responseFallback");
+  }
 
   const addMessage = (text: string) => {
     const userMsg = { role: "user" as const, text };
@@ -110,7 +106,6 @@ export default function ChatWidget() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="mb-4 flex h-[480px] w-[360px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0c0c1d]/95 shadow-2xl shadow-brand-900/30 backdrop-blur-xl"
           >
-            {/* Header */}
             <div className="flex items-center gap-3 border-b border-white/5 bg-gradient-to-r from-brand-600/20 to-accent-500/10 px-5 py-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-accent-500">
                 <Bot className="h-4 w-4 text-white" />
@@ -130,7 +125,6 @@ export default function ChatWidget() {
               </button>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 space-y-3 overflow-y-auto p-4">
               {messages.map((msg, i) => (
                 <motion.div
@@ -153,7 +147,6 @@ export default function ChatWidget() {
               ))}
             </div>
 
-            {/* Quick Replies */}
             {messages.length <= 2 && (
               <div className="flex flex-wrap gap-2 border-t border-white/5 px-4 py-3">
                 {quickReplies.map((reply) => (
@@ -168,7 +161,12 @@ export default function ChatWidget() {
               </div>
             )}
 
-            {/* Input */}
+            <div className="border-t border-white/5 px-4 py-1.5">
+              <p className="text-center text-[10px] text-white/20">
+                {t("demoHint")}
+              </p>
+            </div>
+
             <div className="border-t border-white/5 p-3">
               <div className="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2">
                 <input
@@ -176,7 +174,7 @@ export default function ChatWidget() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  placeholder="Nachricht schreiben..."
+                  placeholder={t("inputPlaceholder")}
                   className="flex-1 bg-transparent text-sm text-white placeholder-white/20 outline-none"
                 />
                 <button
@@ -191,7 +189,6 @@ export default function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Floating Button */}
       <motion.button
         onClick={() => setOpen(!open)}
         whileHover={{ scale: 1.05 }}
@@ -210,7 +207,6 @@ export default function ChatWidget() {
           )}
         </AnimatePresence>
 
-        {/* Pulse ring */}
         {!open && (
           <span className="absolute inset-0 rounded-full animate-ping bg-brand-500/20" />
         )}

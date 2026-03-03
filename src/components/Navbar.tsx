@@ -3,19 +3,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Bot } from "lucide-react";
-
-const navLinks = [
-  { href: "#zielgruppe", label: "Zielgruppe" },
-  { href: "#features", label: "Features" },
-  { href: "#preise", label: "Preise" },
-  { href: "#roadmap", label: "Roadmap" },
-  { href: "#termin", label: "Termin" },
-  { href: "#kontakt", label: "Kontakt" },
-];
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = useTranslations("Navbar");
+
+  const navLinks = [
+    { href: "#zielgruppe", label: t("targetAudience") },
+    { href: "#features", label: t("features") },
+    { href: "#preise", label: t("pricing") },
+    { href: "#roadmap", label: t("roadmap") },
+    { href: "#termin", label: t("appointment") },
+    { href: "#kontakt", label: t("contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -35,7 +38,6 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 group">
           <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 shadow-lg shadow-brand-500/25 transition-shadow group-hover:shadow-brand-500/40">
             <Bot className="h-5 w-5 text-white" />
@@ -47,7 +49,6 @@ export default function Navbar() {
           </span>
         </a>
 
-        {/* Desktop Nav */}
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <a
@@ -58,15 +59,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <LanguageSwitcher />
           <a
             href="#kontakt"
             className="ml-3 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-brand-500/40 hover:brightness-110"
           >
-            Kostenlose Demo
+            {t("freeDemo")}
           </a>
         </div>
 
-        {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="rounded-lg p-2 text-white/60 hover:bg-white/5 md:hidden"
@@ -75,7 +76,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -95,12 +95,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <div className="flex items-center justify-between px-4 py-2">
+                <LanguageSwitcher />
+              </div>
               <a
                 href="#kontakt"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-3 text-center text-sm font-semibold text-white"
               >
-                Kostenlose Demo
+                {t("freeDemo")}
               </a>
             </div>
           </motion.div>

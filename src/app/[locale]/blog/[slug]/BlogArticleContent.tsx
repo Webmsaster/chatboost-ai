@@ -1,14 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Bot, ArrowLeft, Clock, Calendar } from "lucide-react";
 import type { BlogPost } from "@/data/blog-posts";
 
 export default function BlogArticleContent({ post }: { post: BlogPost }) {
+  const t = useTranslations("BlogPage");
+
   return (
     <div className="min-h-screen bg-[#030014]">
-      {/* Navbar */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -33,17 +35,15 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-white/60 transition-all hover:bg-white/5 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
-            Alle Artikel
+            {t("allArticles")}
           </Link>
         </div>
       </motion.nav>
 
-      {/* Content */}
       <main className="relative pt-32 pb-24">
         <div className="absolute inset-0 bg-gradient-to-b from-brand-500/[0.03] via-transparent to-transparent" />
 
         <div className="relative mx-auto max-w-3xl px-6">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -73,7 +73,6 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
             <div className="mt-8 h-px bg-gradient-to-r from-brand-500/20 via-accent-500/20 to-transparent" />
           </motion.div>
 
-          {/* Article Body */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,7 +89,6 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
             ))}
           </motion.div>
 
-          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,28 +96,26 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
             className="mt-16 rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/5 to-accent-500/5 p-8 text-center"
           >
             <h3 className="text-xl font-semibold text-white">
-              Bereit für deinen eigenen KI-Chatbot?
+              {t("ctaTitle")}
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-white/40">
-              Fordere jetzt eine kostenlose Demo an und sieh selbst, wie ein
-              Chatbot dein Business voranbringt.
+              {t("ctaDescription")}
             </p>
             <Link
               href="/#kontakt"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-brand-500/40 hover:brightness-110"
             >
-              Kostenlose Demo anfordern
+              {t("ctaButton")}
             </Link>
           </motion.div>
 
-          {/* Back link */}
           <div className="mt-12 text-center">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-white/30 transition-colors hover:text-white/60"
             >
               <ArrowLeft className="h-4 w-4" />
-              Zurück zu allen Artikeln
+              {t("backToArticles")}
             </Link>
           </div>
         </div>

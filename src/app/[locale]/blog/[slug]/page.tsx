@@ -1,0 +1,64 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getPostBySlug, getAllSlugs } from "@/data/blog-posts";
+import { routing } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import BlogArticleContent from "./BlogArticleContent";
+
+type Props = {
+  params: Promise<{ slug: string; locale: string }>;
+};
+
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs();
+  return routing.locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug }))
+  );
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const post = await getPostBySlug(slug, locale as "de" | "en");
+
+  if (!post) {
+    return { title: locale === "de" ? "Artikel nicht gefunden" : "Article not found" };
+  }
+
+  const siteUrl = "https://chatboost-ai.de";
+
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: {
+      canonical: `${siteUrl}/${locale}/blog/${post.slug}`,
+      languages: {
+        de: `${siteUrl}/de/blog/${post.slug}`,
+        en: `${siteUrl}/en/blog/${post.slug}`,
+      },
+    },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      url: `${siteUrl}/${locale}/blog/${post.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
+  };
+}
+
+export default async function BlogArticlePage({ params }: Props) {
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
+
+  const post = await getPostBySlug(slug, locale as "de" | "en");
+
+  if (!post) {
+    notFound();
+  }
+
+  return <BlogArticleContent post={post} />;
+}

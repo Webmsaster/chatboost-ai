@@ -40,6 +40,11 @@ html {
   scroll-padding-top: 80px;
 }
 
+/* Prevent horizontal overflow from decorative elements */
+html, body {
+  overflow-x: clip;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

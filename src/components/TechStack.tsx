@@ -11,25 +11,26 @@ import {
   CreditCard,
   Layout,
 } from "lucide-react";
-
-const tools = [
-  { icon: Bot, name: "Chatbase", category: "Chatbot-Builder", cost: "Free Tier" },
-  { icon: Brain, name: "OpenAI GPT-4o", category: "KI-Backend", cost: "~$0.01/1k Tokens" },
-  { icon: Calendar, name: "Calendly", category: "Terminbuchung", cost: "Free/Paid" },
-  { icon: Database, name: "HubSpot Free", category: "CRM", cost: "Kostenlos" },
-  { icon: Code2, name: "Widget-Code", category: "Website-Embed", cost: "—" },
-  { icon: CreditCard, name: "Stripe", category: "Zahlungen", cost: "1.4% + 0.25€" },
-  { icon: Layout, name: "Notion", category: "Projektmanagement", cost: "Free" },
-];
+import { useTranslations } from "next-intl";
 
 export default function TechStack() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const t = useTranslations("TechStack");
+
+  const tools = [
+    { icon: Bot, name: "Chatbase", key: "chatbase" },
+    { icon: Brain, name: "OpenAI GPT-4o", key: "openai" },
+    { icon: Calendar, name: "Calendly", key: "calendly" },
+    { icon: Database, name: "HubSpot Free", key: "hubspot" },
+    { icon: Code2, name: "Widget-Code", key: "widget" },
+    { icon: CreditCard, name: "Stripe", key: "stripe" },
+    { icon: Layout, name: "Notion", key: "notion" },
+  ] as const;
 
   return (
     <section className="relative py-24 lg:py-32" ref={ref}>
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -37,17 +38,16 @@ export default function TechStack() {
           className="text-center"
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-500/20 bg-accent-500/5 px-4 py-1.5 text-sm text-accent-400">
-            Tech Stack
+            {t("badge")}
           </div>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Unsere <span className="text-gradient">Tools</span>
+            {t("title")} <span className="text-gradient">{t("titleHighlight")}</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/40">
-            Bewährte Tools, die zuverlässig zusammenarbeiten.
+            {t("description")}
           </p>
         </motion.div>
 
-        {/* Tools Grid */}
         <div className="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-4">
           {tools.map((tool, i) => (
             <motion.div
@@ -62,7 +62,7 @@ export default function TechStack() {
               </div>
               <div>
                 <div className="text-sm font-semibold text-white">{tool.name}</div>
-                <div className="text-xs text-white/30">{tool.category} · {tool.cost}</div>
+                <div className="text-xs text-white/30">{t(`${tool.key}.category`)} · {t(`${tool.key}.cost`)}</div>
               </div>
             </motion.div>
           ))}
