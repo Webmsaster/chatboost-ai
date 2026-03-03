@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 
-const siteUrl = "https://chatboost-ai.de";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 
 const blogSlugs = [
   "ki-chatbot-dsgvo-konform",

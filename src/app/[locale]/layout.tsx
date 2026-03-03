@@ -20,8 +20,8 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const siteUrl = "https://chatboost-ai.de";
-const siteName = "ChatBoost AI";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME!;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -6,7 +6,7 @@ export default function Analytics() {
   return (
     <Script
       defer
-      data-domain="chatboost-ai.de"
+      data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
       src="https://plausible.io/js/script.js"
       strategy="afterInteractive"
     />

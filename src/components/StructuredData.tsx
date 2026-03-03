@@ -8,9 +8,9 @@ export default function StructuredData({ locale = "de" }: { locale?: string }) {
     description: isEn
       ? "Done-for-You AI chatbot service for local businesses. Installation, configuration & maintenance – all from one source."
       : "Done-for-You AI-Chatbot-Service für lokale Unternehmen. Installation, Konfiguration & Wartung – alles aus einer Hand.",
-    url: `https://chatboost-ai.de/${locale}`,
-    email: "info@chatboost-ai.de",
-    telephone: "+4917647511466",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+    telephone: process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace(/\s/g, ""),
     address: {
       "@type": "PostalAddress",
       streetAddress: "Kummern 9",

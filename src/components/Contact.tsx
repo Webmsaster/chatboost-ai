@@ -13,7 +13,7 @@ export default function Contact() {
   const [error, setError] = useState<string | null>(null);
   const t = useTranslations("Contact");
 
-  const FORMSPREE_URL = "https://formspree.io/f/mwvnzbdl";
+  const FORMSPREE_URL = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,8 +84,8 @@ export default function Contact() {
 
             <div className="space-y-4">
               {[
-                { icon: Mail, label: t("emailLabel"), value: "info@chatboost-ai.de" },
-                { icon: Phone, label: t("phoneLabel"), value: "+49 176 4751 1466" },
+                { icon: Mail, label: t("emailLabel"), value: process.env.NEXT_PUBLIC_CONTACT_EMAIL! },
+                { icon: Phone, label: t("phoneLabel"), value: process.env.NEXT_PUBLIC_CONTACT_PHONE! },
                 { icon: MapPin, label: t("locationLabel"), value: t("locationValue") },
               ].map((item) => (
                 <div

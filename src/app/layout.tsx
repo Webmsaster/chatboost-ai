@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chatboost-ai.de"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://chatboost-ai.de"),
 };
 
 export default function RootLayout({
