@@ -15,7 +15,6 @@ export default function Booking() {
     <section id="termin" className="relative py-24 lg:py-32" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.02] to-transparent" />
 
-      {/* eslint-disable-next-line @next/next/no-css-tags */}
       <link
         rel="stylesheet"
         href="https://assets.calendly.com/assets/external/widget.css"
