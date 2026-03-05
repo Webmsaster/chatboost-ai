@@ -10,7 +10,9 @@ export default function Analytics() {
   const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
   useEffect(() => {
-    const check = () => setConsent(localStorage.getItem(CONSENT_KEY) === "accepted");
+    const check = () => {
+      try { setConsent(localStorage.getItem(CONSENT_KEY) === "accepted"); } catch { /* storage unavailable */ }
+    };
     check();
     window.addEventListener("cookie-consent-change", check);
     return () => window.removeEventListener("cookie-consent-change", check);

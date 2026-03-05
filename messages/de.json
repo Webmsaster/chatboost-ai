@@ -184,6 +184,65 @@
     "stat2Label": "Durchschnittsbewertung",
     "stat3Label": "Weiterempfehlungsrate"
   },
+  "CaseStudies": {
+    "badge": "Erfolgsgeschichten",
+    "title": "Echte Ergebnisse,",
+    "titleHighlight": "echte Kunden",
+    "description": "Wie lokale Unternehmen mit ChatBoost AI messbare Ergebnisse erzielen.",
+    "before": "Vorher",
+    "after": "Nachher",
+    "case1": {
+      "name": "Makler Weber Immobilien",
+      "industry": "Immobilienmakler · München",
+      "description": "Mit dem KI-Chatbot werden Leads rund um die Uhr qualifiziert und Besichtigungstermine automatisch gebucht. Das Team kann sich auf Abschlüsse konzentrieren.",
+      "metricLabel": "Qualifizierte Leads / Monat",
+      "result": "+340% mehr Leads"
+    },
+    "case2": {
+      "name": "Salon Haarscharf",
+      "industry": "Friseursalon · Wien",
+      "description": "Automatische Terminbuchung und Erinnerungen haben No-Shows drastisch reduziert. Das Telefon klingelt kaum noch, aber die Bücher sind voll.",
+      "metricLabel": "No-Show-Rate",
+      "result": "87% weniger No-Shows"
+    },
+    "case3": {
+      "name": "Trattoria Rossi",
+      "industry": "Restaurant · Salzburg",
+      "description": "Reservierungen, Speisekarten-Fragen und Öffnungszeiten werden automatisch beantwortet. Das Team hat endlich Zeit für die Gäste vor Ort.",
+      "metricLabel": "Telefonanrufe / Woche",
+      "result": "60% weniger Anrufe"
+    }
+  },
+  "ComparisonTable": {
+    "badge": "Vergleich",
+    "title": "Warum",
+    "titleHighlight": "ChatBoost AI?",
+    "description": "Sieh selbst, wie wir im Vergleich abschneiden.",
+    "noBot": {
+      "name": "Kein Chatbot",
+      "setupTime": "–",
+      "monthlyCost": "0 €"
+    },
+    "diy": {
+      "name": "DIY Chatbot",
+      "setupTime": "2–4 Wochen",
+      "monthlyCost": "20–80 €"
+    },
+    "chatboost": {
+      "name": "ChatBoost AI",
+      "setupTime": "24–48 Std.",
+      "monthlyCost": "ab 79 €"
+    },
+    "feature": {
+      "availability": "24/7 Erreichbarkeit",
+      "leadQualification": "Automatische Lead-Qualifizierung",
+      "appointmentBooking": "Terminbuchungs-Integration",
+      "multiLanguage": "Mehrsprachig (DE/EN)",
+      "scalability": "Skalierbar ohne Mehraufwand",
+      "setupTime": "Setup-Dauer",
+      "monthlyCost": "Monatliche Kosten"
+    }
+  },
   "FAQ": {
     "badge": "FAQ",
     "title": "Häufige",
@@ -327,6 +386,7 @@
     "quickReply2": "Wie funktioniert das?",
     "quickReply3": "Demo anfordern",
     "inputPlaceholder": "Nachricht schreiben...",
+    "typing": "Schreibt...",
     "demoHint": "Dies ist eine Demo – dein Bot wird individuell angepasst",
     "responseCost": "Unsere Pakete starten ab 399€ einmalig + 79€/Monat. Das Pro-Paket mit Terminbuchung und WhatsApp kostet 799€ + 149€/Monat. Soll ich dir mehr Details zeigen?",
     "responseHow": "Ganz einfach: 1) Du sagst uns, was dein Bot können soll. 2) Wir konfigurieren alles für dich. 3) Du bekommst einen Widget-Code für deine Website. Fertig! Alles in unter 48h.",
@@ -343,6 +403,24 @@
     "responseGreeting": "Hallo! Schön, dass du da bist! Wie kann ich dir helfen? Du kannst mich alles rund um unsere KI-Chatbot-Services fragen.",
     "responseThanks": "Gerne! Wenn du noch Fragen hast, bin ich hier. Oder scroll einfach runter zum Kontaktformular, um direkt mit unserem Team zu sprechen."
   },
+  "Checkout": {
+    "successTitle": "Zahlung erfolgreich!",
+    "successDescription": "Vielen Dank für deine Bestellung! Wir melden uns innerhalb von 24 Stunden bei dir, um mit der Einrichtung deines Chatbots zu starten.",
+    "backHome": "Zur Startseite",
+    "cancelTitle": "Zahlung abgebrochen",
+    "cancelDescription": "Du hast den Zahlungsvorgang abgebrochen. Keine Sorge – es wurde nichts berechnet. Du kannst jederzeit erneut ein Paket auswählen.",
+    "backToPricing": "Zurück zu den Paketen"
+  },
+  "Newsletter": {
+    "inlineTitle": "Newsletter",
+    "bannerTitle": "Bleib auf dem Laufenden",
+    "bannerDescription": "Erhalte die neuesten Tipps zu KI-Chatbots, Automatisierung und Leadgenerierung direkt in dein Postfach.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "subscribe": "Abonnieren",
+    "success": "Erfolgreich angemeldet!",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "hint": "Kein Spam. Jederzeit abbestellbar."
+  },
   "NotFound": {
     "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite existiert leider nicht. Vielleicht wurde sie verschoben oder der Link ist fehlerhaft.",
@@ -358,9 +436,16 @@
     "back": "Zurück",
     "allArticles": "Alle Artikel",
     "backToArticles": "Zurück zu allen Artikeln",
+    "allCategories": "Alle",
+    "relatedArticles": "Weitere Artikel",
+    "shareOn": "Teilen auf",
+    "copyLink": "Link kopieren",
     "ctaTitle": "Bereit für deinen eigenen KI-Chatbot?",
     "ctaDescription": "Fordere jetzt eine kostenlose Demo an und sieh selbst, wie ein Chatbot dein Business voranbringt.",
     "ctaButton": "Kostenlose Demo anfordern",
     "articleNotFound": "Artikel nicht gefunden"
+  },
+  "BackToTop": {
+    "ariaLabel": "Nach oben scrollen"
   }
 }

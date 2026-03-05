@@ -72,8 +72,8 @@ export default async function DatenschutzPage({ params }: Props) {
               <p>{locale === "de" ? "Österreich" : "Austria"}</p>
               <p className="mt-2">
                 E-Mail:{" "}
-                <a href="mailto:info@chatboost-ai.de" className="text-brand-300 hover:text-brand-200 transition-colors">
-                  info@chatboost-ai.de
+                <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} className="text-brand-300 hover:text-brand-200 transition-colors">
+                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
               </p>
             </div>

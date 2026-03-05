@@ -13,21 +13,27 @@ export default function CookieBanner() {
   const t = useTranslations("CookieBanner");
 
   useEffect(() => {
-    const consent = localStorage.getItem(CONSENT_KEY);
-    if (!consent) {
+    try {
+      const consent = localStorage.getItem(CONSENT_KEY);
+      if (!consent) {
+        const timer = setTimeout(() => setVisible(true), 1500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // localStorage unavailable (e.g. Safari private mode) – show banner
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
   }, []);
 
   const accept = () => {
-    localStorage.setItem(CONSENT_KEY, "accepted");
+    try { localStorage.setItem(CONSENT_KEY, "accepted"); } catch { /* storage unavailable */ }
     window.dispatchEvent(new Event("cookie-consent-change"));
     setVisible(false);
   };
 
   const decline = () => {
-    localStorage.setItem(CONSENT_KEY, "declined");
+    try { localStorage.setItem(CONSENT_KEY, "declined"); } catch { /* storage unavailable */ }
     window.dispatchEvent(new Event("cookie-consent-change"));
     setVisible(false);
   };

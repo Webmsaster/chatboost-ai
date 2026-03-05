@@ -76,7 +76,7 @@ export default function Booking() {
                 </a>
 
                 <a
-                  href="tel:+4917647511466"
+                  href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace(/\s/g, "")}`}
                   className="group flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-300 hover:border-brand-500/20 hover:bg-white/[0.04]"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500/20 to-accent-500/20 text-brand-300 transition-colors group-hover:from-brand-500/30 group-hover:to-accent-500/30">

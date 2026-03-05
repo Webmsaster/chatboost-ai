@@ -111,9 +111,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         <StructuredData locale={locale} />
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+          <CookieBanner />
+          <BackToTop />
         </NextIntlClientProvider>
         <Analytics />
-        <BackToTop />
       </body>
     </html>
   );

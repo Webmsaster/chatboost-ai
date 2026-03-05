@@ -1,20 +1,11 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { getAllSlugs } from "@/data/blog-posts";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 
-const blogSlugs = [
-  "ki-chatbot-dsgvo-konform",
-  "ki-chatbot-kosten-roi",
-  "immobilienmakler-ki-chatbot",
-  "chatbot-vs-kontaktformular",
-  "restaurants-ki-chatbots-zeit-sparen",
-  "google-bewertungen-chatbot",
-  "chatbot-einrichten-7-schritte",
-  "arztpraxis-chatbot-patientenkommunikation",
-];
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogSlugs = await getAllSlugs();
   const locales = routing.locales;
 
   const staticRoutes = ["", "/blog", "/impressum", "/datenschutz"];

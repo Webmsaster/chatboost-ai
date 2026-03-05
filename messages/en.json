@@ -184,6 +184,65 @@
     "stat2Label": "Average Rating",
     "stat3Label": "Recommendation Rate"
   },
+  "CaseStudies": {
+    "badge": "Success Stories",
+    "title": "Real Results,",
+    "titleHighlight": "Real Clients",
+    "description": "How local businesses achieve measurable results with ChatBoost AI.",
+    "before": "Before",
+    "after": "After",
+    "case1": {
+      "name": "Weber Real Estate",
+      "industry": "Real Estate Agent · Munich",
+      "description": "The AI chatbot qualifies leads around the clock and automatically books property viewings. The team can focus on closing deals.",
+      "metricLabel": "Qualified Leads / Month",
+      "result": "+340% more leads"
+    },
+    "case2": {
+      "name": "Salon Haarscharf",
+      "industry": "Hair Salon · Vienna",
+      "description": "Automatic appointment booking and reminders have drastically reduced no-shows. The phone barely rings, but the books are full.",
+      "metricLabel": "No-Show Rate",
+      "result": "87% fewer no-shows"
+    },
+    "case3": {
+      "name": "Trattoria Rossi",
+      "industry": "Restaurant · Salzburg",
+      "description": "Reservations, menu questions, and opening hours are answered automatically. The team finally has time for guests on-site.",
+      "metricLabel": "Phone Calls / Week",
+      "result": "60% fewer calls"
+    }
+  },
+  "ComparisonTable": {
+    "badge": "Comparison",
+    "title": "Why",
+    "titleHighlight": "ChatBoost AI?",
+    "description": "See for yourself how we compare.",
+    "noBot": {
+      "name": "No Chatbot",
+      "setupTime": "–",
+      "monthlyCost": "€0"
+    },
+    "diy": {
+      "name": "DIY Chatbot",
+      "setupTime": "2–4 weeks",
+      "monthlyCost": "€20–80"
+    },
+    "chatboost": {
+      "name": "ChatBoost AI",
+      "setupTime": "24–48 hrs",
+      "monthlyCost": "from €79"
+    },
+    "feature": {
+      "availability": "24/7 Availability",
+      "leadQualification": "Automatic Lead Qualification",
+      "appointmentBooking": "Appointment Booking Integration",
+      "multiLanguage": "Multilingual (DE/EN)",
+      "scalability": "Scalable Without Extra Effort",
+      "setupTime": "Setup Time",
+      "monthlyCost": "Monthly Cost"
+    }
+  },
   "FAQ": {
     "badge": "FAQ",
     "title": "Frequently Asked",
@@ -327,6 +386,7 @@
     "quickReply2": "How does it work?",
     "quickReply3": "Request demo",
     "inputPlaceholder": "Type a message...",
+    "typing": "Typing...",
     "demoHint": "This is a demo – your bot will be individually customized",
     "responseCost": "Our packages start at €399 one-time + €79/month. The Pro package with appointment booking and WhatsApp costs €799 + €149/month. Want me to show you more details?",
     "responseHow": "It's simple: 1) Tell us what your bot should do. 2) We configure everything for you. 3) You get a widget code for your website. Done! All in under 48h.",
@@ -343,6 +403,24 @@
     "responseGreeting": "Hello! Great to have you here! How can I help you? You can ask me anything about our AI chatbot services.",
     "responseThanks": "You're welcome! If you have more questions, I'm here. Or just scroll down to the contact form to speak directly with our team."
   },
+  "Checkout": {
+    "successTitle": "Payment Successful!",
+    "successDescription": "Thank you for your order! We'll get in touch within 24 hours to start setting up your chatbot.",
+    "backHome": "Back to Home",
+    "cancelTitle": "Payment Cancelled",
+    "cancelDescription": "You cancelled the payment process. Don't worry – nothing was charged. You can select a package again anytime.",
+    "backToPricing": "Back to Packages"
+  },
+  "Newsletter": {
+    "inlineTitle": "Newsletter",
+    "bannerTitle": "Stay in the Loop",
+    "bannerDescription": "Get the latest tips on AI chatbots, automation and lead generation delivered to your inbox.",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "success": "Successfully subscribed!",
+    "error": "Something went wrong. Please try again.",
+    "hint": "No spam. Unsubscribe anytime."
+  },
   "NotFound": {
     "title": "Page Not Found",
     "description": "The page you're looking for doesn't exist. It may have been moved or the link might be incorrect.",
@@ -358,9 +436,16 @@
     "back": "Back",
     "allArticles": "All Articles",
     "backToArticles": "Back to all articles",
+    "allCategories": "All",
+    "relatedArticles": "Related Articles",
+    "shareOn": "Share on",
+    "copyLink": "Copy link",
     "ctaTitle": "Ready for your own AI chatbot?",
     "ctaDescription": "Request a free demo now and see for yourself how a chatbot can boost your business.",
     "ctaButton": "Request Free Demo",
     "articleNotFound": "Article not found"
+  },
+  "BackToTop": {
+    "ariaLabel": "Scroll to top"
   }
 }

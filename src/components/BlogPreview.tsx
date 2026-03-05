@@ -1,27 +1,20 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Clock, Calendar, ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/data/blog-posts";
 
-export default function BlogPreview() {
+type Props = {
+  posts: BlogPost[];
+};
+
+export default function BlogPreview({ posts: latestPosts }: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const t = useTranslations("BlogPreview");
-  const locale = useLocale();
-  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
-
-  useEffect(() => {
-    async function loadPosts() {
-      const { getBlogPosts } = await import("@/data/blog-posts");
-      const posts = await getBlogPosts(locale as "de" | "en");
-      setLatestPosts(posts.slice(0, 3));
-    }
-    loadPosts();
-  }, [locale]);
 
   return (
     <section id="blog" className="relative py-24 lg:py-32" ref={ref}>

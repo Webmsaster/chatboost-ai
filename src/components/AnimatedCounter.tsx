@@ -26,7 +26,6 @@ export default function AnimatedCounter({
     hasAnimated.current = true;
 
     const steps = 60;
-    const increment = value / steps;
     const stepTime = duration / steps;
     let current = 0;
     let step = 0;

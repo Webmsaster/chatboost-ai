@@ -1,16 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Bot, ArrowLeft, Clock, Calendar } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { BlogPost } from "@/data/blog-posts";
+import { renderContent } from "@/lib/render-content";
+import SocialShareButtons from "@/components/SocialShareButtons";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
-export default function BlogArticleContent({ post }: { post: BlogPost }) {
+type Props = {
+  post: BlogPost;
+  relatedPosts: BlogPost[];
+};
+
+export default function BlogArticleContent({ post, relatedPosts }: Props) {
   const t = useTranslations("BlogPage");
+  const locale = useLocale();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = document.documentElement;
+      const scrollTop = el.scrollTop;
+      const scrollHeight = el.scrollHeight - el.clientHeight;
+      setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  const articleUrl = `${siteUrl}/${locale}/blog/${post.slug}`;
 
   return (
     <div className="min-h-screen bg-[#030014]">
+      {/* Reading progress bar */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-1">
+        <div
+          className="h-full bg-gradient-to-r from-brand-500 to-accent-500 transition-[width] duration-150 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -59,15 +93,19 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
 
             <p className="mt-4 text-lg text-white/40">{post.description}</p>
 
-            <div className="mt-6 flex items-center gap-4 text-sm text-white/30">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                {post.date}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" />
-                {post.readTime}
-              </span>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-4 text-sm text-white/30">
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" />
+                  {post.date}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4" />
+                  {post.readTime}
+                </span>
+              </div>
+
+              <SocialShareButtons url={articleUrl} title={post.title} />
             </div>
 
             <div className="mt-8 h-px bg-gradient-to-r from-brand-500/20 via-accent-500/20 to-transparent" />
@@ -79,16 +117,10 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-10 space-y-6"
           >
-            {post.content.map((paragraph, i) => (
-              <p
-                key={i}
-                className="text-base leading-relaxed text-white/60"
-              >
-                {paragraph}
-              </p>
-            ))}
+            {renderContent(post.content)}
           </motion.div>
 
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,6 +140,50 @@ export default function BlogArticleContent({ post }: { post: BlogPost }) {
               {t("ctaButton")}
             </Link>
           </motion.div>
+
+          {/* Newsletter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="mt-12"
+          >
+            <NewsletterSignup variant="banner" />
+          </motion.div>
+
+          {/* Related Articles */}
+          {relatedPosts.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-16"
+            >
+              <h3 className="mb-6 text-xl font-bold text-white">
+                {t("relatedArticles")}
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    href={`/blog/${related.slug}`}
+                    className="group flex flex-col rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:bg-white/[0.04] hover:border-brand-500/20"
+                  >
+                    <span className="mb-2 inline-flex w-fit items-center rounded-full border border-accent-500/20 bg-accent-500/5 px-2.5 py-0.5 text-[10px] font-medium text-accent-400">
+                      {related.category}
+                    </span>
+                    <h4 className="mb-2 text-sm font-semibold leading-snug text-white transition-colors group-hover:text-brand-200">
+                      {related.title}
+                    </h4>
+                    <span className="mt-auto flex items-center gap-1.5 text-xs text-white/30">
+                      <Clock className="h-3 w-3" />
+                      {related.readTime}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           <div className="mt-12 text-center">
             <Link

@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
           key: "Permissions-Policy",
           value: "camera=(), microphone=(), geolocation=()",
         },
+        {
+          key: "Content-Security-Policy",
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://plausible.io https://api.openai.com https://formspree.io https://calendly.com; frame-src https://calendly.com;",
+        },
       ],
     },
     {

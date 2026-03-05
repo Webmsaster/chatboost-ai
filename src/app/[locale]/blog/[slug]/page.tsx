@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPostBySlug, getAllSlugs } from "@/data/blog-posts";
+import { getPostBySlug, getAllSlugs, getBlogPosts } from "@/data/blog-posts";
 import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import BlogArticleContent from "./BlogArticleContent";
@@ -60,5 +60,19 @@ export default async function BlogArticlePage({ params }: Props) {
     notFound();
   }
 
-  return <BlogArticleContent post={post} />;
+  // Get related posts (same category, exclude current)
+  const allPosts = await getBlogPosts(locale as "de" | "en");
+  const relatedPosts = allPosts
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 3);
+
+  // If not enough same-category posts, fill with others
+  if (relatedPosts.length < 3) {
+    const remaining = allPosts
+      .filter((p) => p.slug !== post.slug && !relatedPosts.find((r) => r.slug === p.slug))
+      .slice(0, 3 - relatedPosts.length);
+    relatedPosts.push(...remaining);
+  }
+
+  return <BlogArticleContent post={post} relatedPosts={relatedPosts} />;
 }
