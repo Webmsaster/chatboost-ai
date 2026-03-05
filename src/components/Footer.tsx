@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Bot, Heart } from "lucide-react";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -22,7 +23,6 @@ export default function Footer() {
     [t("legalTitle")]: [
       { label: t("imprint"), href: "/impressum" },
       { label: t("privacy"), href: "/datenschutz" },
-      { label: t("terms"), href: "#" },
     ],
   };
 
@@ -44,6 +44,9 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/30">
               {t("description")}
             </p>
+            <div className="mt-6">
+              <NewsletterSignup variant="inline" />
+            </div>
           </div>
 
           {Object.entries(links).map(([category, items]) => (
