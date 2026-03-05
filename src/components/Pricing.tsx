@@ -1,14 +1,16 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Check, Star, ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
+import { Check, Star, ArrowRight, Loader2 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Pricing() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const t = useTranslations("Pricing");
+  const locale = useLocale();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const plans = [
     {
@@ -39,6 +41,30 @@ export default function Pricing() {
       buttonStyle: "border border-white/10 text-white/70 hover:bg-white/5 hover:text-white",
     },
   ] as const;
+
+  const handleCheckout = async (planKey: string) => {
+    setLoadingPlan(planKey);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: planKey, locale }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        // Stripe not configured – fall back to contact section
+        window.location.href = "#kontakt";
+      }
+    } catch {
+      window.location.href = "#kontakt";
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   return (
     <section id="preise" className="relative py-24 lg:py-32" ref={ref}>
@@ -101,13 +127,20 @@ export default function Pricing() {
                   <span className="text-sm text-white/30">{t("perMonth")}</span>
                 </div>
 
-                <a
-                  href="#kontakt"
-                  className={`mt-8 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all ${plan.buttonStyle}`}
+                <button
+                  onClick={() => handleCheckout(plan.key)}
+                  disabled={loadingPlan !== null}
+                  className={`mt-8 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all disabled:opacity-70 ${plan.buttonStyle}`}
                 >
-                  {t("cta")}
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                  {loadingPlan === plan.key ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      {t("cta")}
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
 
                 <div className="mt-8 space-y-3">
                   {Array.from({ length: plan.featureCount }).map((_, j) => (
