@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-type Message = { role: "bot" | "user"; text: string };
+type Message = { id: number; role: "bot" | "user"; text: string };
+let msgIdCounter = 0;
 
 export default function ChatWidget() {
   const t = useTranslations("ChatWidget");
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "bot", text: t("greeting") },
+    { id: ++msgIdCounter, role: "bot", text: t("greeting") },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -121,7 +122,7 @@ export default function ChatWidget() {
   }, [sessionId]);
 
   const addMessage = async (text: string) => {
-    const userMsg: Message = { role: "user", text };
+    const userMsg: Message = { id: ++msgIdCounter, role: "user", text };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setIsTyping(true);
@@ -129,7 +130,7 @@ export default function ChatWidget() {
     if (useAI) {
       const aiReply = await getAIResponse(newMessages);
       if (aiReply) {
-        setMessages((prev) => [...prev, { role: "bot", text: aiReply }]);
+        setMessages((prev) => [...prev, { id: ++msgIdCounter, role: "bot", text: aiReply }]);
         setIsTyping(false);
         return;
       }
@@ -139,7 +140,7 @@ export default function ChatWidget() {
     // Keyword fallback
     setTimeout(() => {
       const botResponse = findKeywordResponse(text);
-      setMessages((prev) => [...prev, { role: "bot", text: botResponse }]);
+      setMessages((prev) => [...prev, { id: ++msgIdCounter, role: "bot", text: botResponse }]);
       setIsTyping(false);
     }, 800);
   };
@@ -181,9 +182,9 @@ export default function ChatWidget() {
             </div>
 
             <div className="flex-1 space-y-3 overflow-y-auto p-4">
-              {messages.map((msg, i) => (
+              {messages.map((msg) => (
                 <motion.div
-                  key={i}
+                  key={msg.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
@@ -246,12 +247,14 @@ export default function ChatWidget() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
                   placeholder={t("inputPlaceholder")}
+                  aria-label={t("inputPlaceholder")}
                   disabled={isTyping}
                   className="flex-1 bg-transparent text-sm text-white placeholder-white/20 outline-none disabled:opacity-50"
                 />
                 <button
                   onClick={handleSend}
                   disabled={isTyping}
+                  aria-label="Send message"
                   className="rounded-lg p-1.5 text-brand-400 transition-colors hover:bg-brand-500/10 disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" />

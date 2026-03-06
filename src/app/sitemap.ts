@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getAllSlugs } from "@/data/blog-posts";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chatboost-ai.de";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogSlugs = await getAllSlugs();

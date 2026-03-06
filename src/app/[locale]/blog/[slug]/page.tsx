@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: locale === "de" ? "Artikel nicht gefunden" : "Article not found" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chatboost-ai.de";
 
   return {
     title: post.title,

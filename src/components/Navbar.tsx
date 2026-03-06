@@ -22,9 +22,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
     <motion.nav

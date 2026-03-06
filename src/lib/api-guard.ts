@@ -7,7 +7,12 @@ export function validateOrigin(request: NextRequest): NextResponse | null {
   // In development, allow requests without origin
   if (!siteUrl || process.env.NODE_ENV === "development") return null;
 
-  const allowedOrigins = [siteUrl, new URL(siteUrl).origin];
+  let allowedOrigins: string[];
+  try {
+    allowedOrigins = [siteUrl, new URL(siteUrl).origin];
+  } catch {
+    allowedOrigins = [siteUrl];
+  }
 
   if (!origin || !allowedOrigins.includes(origin)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });

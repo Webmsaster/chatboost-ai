@@ -13,7 +13,8 @@ export default function Contact() {
   const [error, setError] = useState<string | null>(null);
   const t = useTranslations("Contact");
 
-  const FORMSPREE_URL = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+  const FORMSPREE_URL = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,8 +85,8 @@ export default function Contact() {
 
             <div className="space-y-4">
               {[
-                { icon: Mail, label: t("emailLabel"), value: process.env.NEXT_PUBLIC_CONTACT_EMAIL! },
-                { icon: Phone, label: t("phoneLabel"), value: process.env.NEXT_PUBLIC_CONTACT_PHONE! },
+                { icon: Mail, label: t("emailLabel"), value: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "" },
+                { icon: Phone, label: t("phoneLabel"), value: process.env.NEXT_PUBLIC_CONTACT_PHONE || "" },
                 { icon: MapPin, label: t("locationLabel"), value: t("locationValue") },
               ].map((item) => (
                 <div
@@ -140,8 +141,9 @@ export default function Contact() {
                   <input type="hidden" name="_subject" value={t("formSubject")} />
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formName")}</label>
+                      <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-white/50">{t("formName")}</label>
                       <input
+                        id="contact-name"
                         type="text"
                         name="name"
                         required
@@ -150,8 +152,9 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formEmail")}</label>
+                      <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-white/50">{t("formEmail")}</label>
                       <input
+                        id="contact-email"
                         type="email"
                         name="email"
                         required
@@ -162,8 +165,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formIndustry")}</label>
+                    <label htmlFor="contact-branche" className="mb-1.5 block text-sm font-medium text-white/50">{t("formIndustry")}</label>
                     <select
+                      id="contact-branche"
                       name="branche"
                       required
                       className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/70 outline-none transition-colors focus:border-brand-500/40 focus:bg-white/[0.05]"
@@ -177,8 +181,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formWebsite")}</label>
+                    <label htmlFor="contact-website" className="mb-1.5 block text-sm font-medium text-white/50">{t("formWebsite")}</label>
                     <input
+                      id="contact-website"
                       type="url"
                       name="website"
                       placeholder={t("formWebsitePlaceholder")}
@@ -187,8 +192,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-white/50">{t("formMessage")}</label>
+                    <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-white/50">{t("formMessage")}</label>
                     <textarea
+                      id="contact-message"
                       name="nachricht"
                       rows={4}
                       placeholder={t("formMessagePlaceholder")}

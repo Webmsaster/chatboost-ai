@@ -11,7 +11,7 @@ import StructuredData from "@/components/StructuredData";
 import "../globals.css";
 
 const inter = Inter({
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -20,8 +20,8 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME!;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://chatboost-ai.de";
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "ChatBoost AI";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

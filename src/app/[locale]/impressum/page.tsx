@@ -77,11 +77,11 @@ export default async function ImpressumPage({ params }: Props) {
             <div className="glass rounded-2xl p-6 space-y-1">
               <p>
                 E-Mail:{" "}
-                <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} className="text-brand-300 hover:text-brand-200 transition-colors">
-                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || ""}`} className="text-brand-300 hover:text-brand-200 transition-colors">
+                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL || ""}
                 </a>
               </p>
-              <p>{locale === "de" ? "Telefon" : "Phone"}: {process.env.NEXT_PUBLIC_CONTACT_PHONE}</p>
+              <p>{locale === "de" ? "Telefon" : "Phone"}: {process.env.NEXT_PUBLIC_CONTACT_PHONE || ""}</p>
             </div>
           </section>
 

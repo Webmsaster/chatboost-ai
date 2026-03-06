@@ -16,7 +16,8 @@ export default function NewsletterSignup({ variant = "inline" }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const FORMSPREE_URL = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+  const FORMSPREE_URL = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

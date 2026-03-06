@@ -61,7 +61,7 @@ export default function Booking() {
 
               <div className="space-y-4">
                 <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL || ""}`}
                   className="group flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-300 hover:border-brand-500/20 hover:bg-white/[0.04]"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500/20 to-accent-500/20 text-brand-300 transition-colors group-hover:from-brand-500/30 group-hover:to-accent-500/30">
@@ -69,13 +69,13 @@ export default function Booking() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-white">{t("email")}</p>
-                    <p className="text-sm text-white/40">{process.env.NEXT_PUBLIC_CONTACT_EMAIL}</p>
+                    <p className="text-sm text-white/40">{process.env.NEXT_PUBLIC_CONTACT_EMAIL || ""}</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-white/20 transition-all group-hover:translate-x-1 group-hover:text-brand-400" />
                 </a>
 
                 <a
-                  href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace(/\s/g, "")}`}
+                  href={`tel:${(process.env.NEXT_PUBLIC_CONTACT_PHONE || "").replace(/\s/g, "")}`}
                   className="group flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-300 hover:border-brand-500/20 hover:bg-white/[0.04]"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500/20 to-accent-500/20 text-brand-300 transition-colors group-hover:from-brand-500/30 group-hover:to-accent-500/30">
@@ -83,7 +83,7 @@ export default function Booking() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-white">{t("phone")}</p>
-                    <p className="text-sm text-white/40">{process.env.NEXT_PUBLIC_CONTACT_PHONE}</p>
+                    <p className="text-sm text-white/40">{process.env.NEXT_PUBLIC_CONTACT_PHONE || ""}</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-white/20 transition-all group-hover:translate-x-1 group-hover:text-brand-400" />
                 </a>
