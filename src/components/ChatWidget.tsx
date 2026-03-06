@@ -90,7 +90,7 @@ export default function ChatWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const getAIResponse = async (
+  const getAIResponse = useCallback(async (
     allMessages: Message[]
   ): Promise<string | null> => {
     try {
@@ -118,7 +118,7 @@ export default function ChatWidget() {
     } catch {
       return null;
     }
-  };
+  }, [sessionId]);
 
   const addMessage = async (text: string) => {
     const userMsg: Message = { role: "user", text };

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { rateLimit } from "@/lib/rate-limit";
+import { validateOrigin, getClientIp } from "@/lib/api-guard";
 
 const PLANS: Record<string, { name: string; priceInCents: number }> = {
   starter: { name: "ChatBoost AI – Starter Setup", priceInCents: 39900 },
@@ -8,6 +10,18 @@ const PLANS: Record<string, { name: string; priceInCents: number }> = {
 };
 
 export async function POST(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
+  // IP-based rate limiting: 5 checkout attempts per minute
+  const ip = getClientIp(request);
+  const { success } = rateLimit(`checkout:${ip}`, { max: 5, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429 }
+    );
+  }
   const secretKey = process.env.STRIPE_SECRET_KEY;
 
   if (!secretKey) {

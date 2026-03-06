@@ -1,15 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/chat-system-prompt";
-
-const RATE_LIMIT_MAX = 10;
+import { rateLimit } from "@/lib/rate-limit";
+import { validateOrigin, getClientIp } from "@/lib/api-guard";
 
 export async function POST(request: NextRequest) {
+  const originError = validateOrigin(request);
+  if (originError) return originError;
+
   const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
     return NextResponse.json(
       { error: "AI not configured" },
       { status: 503 }
+    );
+  }
+
+  // IP-based rate limiting: 15 requests per minute
+  const ip = getClientIp(request);
+  const { success } = rateLimit(`chat:${ip}`, { max: 15, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded", rateLimited: true },
+      { status: 429 }
     );
   }
 
@@ -24,14 +37,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Invalid request" },
         { status: 400 }
-      );
-    }
-
-    // Validate message count (server-side rate limit)
-    if (messages.length > RATE_LIMIT_MAX * 2) {
-      return NextResponse.json(
-        { error: "Rate limit exceeded", rateLimited: true },
-        { status: 429 }
       );
     }
 
