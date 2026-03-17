@@ -31,13 +31,21 @@ export default function NewsletterSignup({ variant = "inline" }: Props) {
     formData.set("_subject", "New Newsletter Signup");
 
     try {
-      const response = await fetch(FORMSPREE_URL, {
-        method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
-      });
+      const results = await Promise.allSettled([
+        FORMSPREE_URL
+          ? fetch(FORMSPREE_URL, { method: "POST", body: formData, headers: { Accept: "application/json" } })
+          : Promise.resolve(null),
+        fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }),
+      ]);
 
-      if (response.ok) {
+      const formspreeOk = results[0].status === "fulfilled" && (results[0].value === null || results[0].value.ok);
+      const dbOk = results[1].status === "fulfilled" && results[1].value.ok;
+
+      if (formspreeOk || dbOk) {
         setSubmitted(true);
         setEmail("");
       } else {
