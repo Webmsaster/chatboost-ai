@@ -4,7 +4,10 @@ import { cookies } from "next/headers";
 const COOKIE_NAME = "admin_token";
 
 function getSecret() {
-  const secret = process.env.ADMIN_JWT_SECRET || process.env.STRIPE_SECRET_KEY || "dev-secret";
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret) {
+    throw new Error("ADMIN_JWT_SECRET environment variable is required");
+  }
   return new TextEncoder().encode(secret);
 }
 
