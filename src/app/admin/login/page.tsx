@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAdminTranslations } from "../translations";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -9,6 +10,7 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const t = useAdminTranslations().login;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,10 +28,10 @@ export default function AdminLogin() {
         router.push("/admin");
       } else {
         const data = await res.json();
-        setError(data.error || "Login fehlgeschlagen");
+        setError(data.error || t.error);
       }
     } catch {
-      setError("Netzwerkfehler");
+      setError(t.networkError);
     } finally {
       setLoading(false);
     }
@@ -38,13 +40,13 @@ export default function AdminLogin() {
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
       <div className="w-full max-w-sm">
-        <h1 className="mb-8 text-center text-2xl font-bold">Admin Login</h1>
+        <h1 className="mb-8 text-center text-2xl font-bold">{t.title}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Benutzername"
+            placeholder={t.username}
             required
             className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:border-indigo-500/40"
           />
@@ -52,7 +54,7 @@ export default function AdminLogin() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Passwort"
+            placeholder={t.password}
             required
             className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:border-indigo-500/40"
           />
@@ -62,7 +64,7 @@ export default function AdminLogin() {
             disabled={loading}
             className="w-full rounded-xl bg-indigo-600 py-3 text-sm font-semibold transition-colors hover:bg-indigo-500 disabled:opacity-50"
           >
-            {loading ? "..." : "Anmelden"}
+            {loading ? "..." : t.submit}
           </button>
         </form>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { getAdminLocale, useAdminTranslations } from "./translations";
 
 type Tab = "orders" | "contacts" | "subscribers";
 
@@ -44,6 +45,8 @@ export default function AdminDashboard() {
   const [data, setData] = useState<(Order | Contact | Subscriber)[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const t = useAdminTranslations().dashboard;
+  const locale = getAdminLocale();
 
   const fetchData = useCallback(async (currentTab: Tab) => {
     setLoading(true);
@@ -79,21 +82,21 @@ export default function AdminDashboard() {
   }, [tab, fetchData]);
 
   const formatCurrency = (cents: number) =>
-    new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cents / 100);
+    new Intl.NumberFormat(locale === "en" ? "en-US" : "de-DE", { style: "currency", currency: "EUR" }).format(cents / 100);
 
   const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    new Date(iso).toLocaleDateString(locale === "en" ? "en-US" : "de-DE", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
   const tabs: { key: Tab; label: string }[] = [
-    { key: "orders", label: "Bestellungen" },
-    { key: "contacts", label: "Kontaktanfragen" },
-    { key: "subscribers", label: "Newsletter" },
+    { key: "orders", label: t.tabs.orders },
+    { key: "contacts", label: t.tabs.contacts },
+    { key: "subscribers", label: t.tabs.subscribers },
   ];
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold">{t.title}</h1>
         <button
           onClick={() => {
             document.cookie = "admin_token=; path=/; max-age=0";
@@ -101,48 +104,48 @@ export default function AdminDashboard() {
           }}
           className="rounded-lg border border-white/10 px-4 py-2 text-sm text-white/60 hover:text-white"
         >
-          Abmelden
+          {t.logout}
         </button>
       </div>
 
       {summary && (
         <div className="mb-8 grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm text-white/40">Bestellungen</div>
+            <div className="text-sm text-white/40">{t.orders}</div>
             <div className="mt-1 text-2xl font-bold">{summary.orders.count}</div>
-            <div className="mt-1 text-sm text-indigo-400">{formatCurrency(summary.orders.revenue)} Umsatz</div>
+            <div className="mt-1 text-sm text-indigo-400">{formatCurrency(summary.orders.revenue)} {t.revenue}</div>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm text-white/40">Kontaktanfragen</div>
+            <div className="text-sm text-white/40">{t.contacts}</div>
             <div className="mt-1 text-2xl font-bold">{summary.contacts}</div>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm text-white/40">Newsletter Abonnenten</div>
+            <div className="text-sm text-white/40">{t.subscribers}</div>
             <div className="mt-1 text-2xl font-bold">{summary.subscribers}</div>
           </div>
         </div>
       )}
 
       <div className="mb-6 flex gap-2">
-        {tabs.map((t) => (
+        {tabs.map((item) => (
           <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
+            key={item.key}
+            onClick={() => setTab(item.key)}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              tab === t.key
+              tab === item.key
                 ? "bg-indigo-600 text-white"
                 : "border border-white/10 text-white/60 hover:text-white"
             }`}
           >
-            {t.label}
+            {item.label}
           </button>
         ))}
       </div>
 
       {loading ? (
-        <div className="py-12 text-center text-white/40">Laden...</div>
+        <div className="py-12 text-center text-white/40">{t.loading}</div>
       ) : data.length === 0 ? (
-        <div className="py-12 text-center text-white/40">Keine Einträge vorhanden</div>
+        <div className="py-12 text-center text-white/40">{t.empty}</div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-white/10">
           <table className="w-full text-sm">
@@ -150,27 +153,27 @@ export default function AdminDashboard() {
               <tr className="border-b border-white/10 bg-white/5 text-left text-white/60">
                 {tab === "orders" && (
                   <>
-                    <th className="px-4 py-3">Plan</th>
-                    <th className="px-4 py-3">Betrag</th>
-                    <th className="px-4 py-3">Kunde</th>
-                    <th className="px-4 py-3">Email</th>
-                    <th className="px-4 py-3">Status</th>
-                    <th className="px-4 py-3">Datum</th>
+                    <th className="px-4 py-3">{t.columns.plan}</th>
+                    <th className="px-4 py-3">{t.columns.amount}</th>
+                    <th className="px-4 py-3">{t.columns.customer}</th>
+                    <th className="px-4 py-3">{t.columns.email}</th>
+                    <th className="px-4 py-3">{t.columns.status}</th>
+                    <th className="px-4 py-3">{t.columns.date}</th>
                   </>
                 )}
                 {tab === "contacts" && (
                   <>
-                    <th className="px-4 py-3">Name</th>
-                    <th className="px-4 py-3">Email</th>
-                    <th className="px-4 py-3">Branche</th>
-                    <th className="px-4 py-3">Nachricht</th>
-                    <th className="px-4 py-3">Datum</th>
+                    <th className="px-4 py-3">{t.columns.name}</th>
+                    <th className="px-4 py-3">{t.columns.email}</th>
+                    <th className="px-4 py-3">{t.columns.industry}</th>
+                    <th className="px-4 py-3">{t.columns.message}</th>
+                    <th className="px-4 py-3">{t.columns.date}</th>
                   </>
                 )}
                 {tab === "subscribers" && (
                   <>
-                    <th className="px-4 py-3">Email</th>
-                    <th className="px-4 py-3">Angemeldet am</th>
+                    <th className="px-4 py-3">{t.columns.email}</th>
+                    <th className="px-4 py-3">{t.columns.subscribedAt}</th>
                   </>
                 )}
               </tr>
