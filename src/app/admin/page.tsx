@@ -44,20 +44,25 @@ export default function AdminDashboard() {
   const [summary, setSummary] = useState<Summary | null>(null);
   const [data, setData] = useState<(Order | Contact | Subscriber)[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const limit = 20;
   const router = useRouter();
   const t = useAdminTranslations().dashboard;
   const locale = getAdminLocale();
+  const totalPages = Math.max(1, Math.ceil(total / limit));
 
-  const fetchData = useCallback(async (currentTab: Tab) => {
+  const fetchData = useCallback(async (currentTab: Tab, currentPage: number) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/stats?tab=${currentTab}`);
+      const res = await fetch(`/api/admin/stats?tab=${currentTab}&page=${currentPage}&limit=${limit}`);
       if (res.status === 401) {
         router.push("/admin/login");
         return;
       }
       const json = await res.json();
       setData(json.data || []);
+      setTotal(json.total || 0);
     } catch {
       console.error("Failed to fetch data");
     } finally {
@@ -78,8 +83,8 @@ export default function AdminDashboard() {
   }, [router]);
 
   useEffect(() => {
-    fetchData(tab);
-  }, [tab, fetchData]);
+    fetchData(tab, page);
+  }, [tab, page, fetchData]);
 
   const formatCurrency = (cents: number) =>
     new Intl.NumberFormat(locale === "en" ? "en-US" : "de-DE", { style: "currency", currency: "EUR" }).format(cents / 100);
@@ -130,7 +135,7 @@ export default function AdminDashboard() {
         {tabs.map((item) => (
           <button
             key={item.key}
-            onClick={() => setTab(item.key)}
+            onClick={() => { setTab(item.key); setPage(1); }}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
               tab === item.key
                 ? "bg-indigo-600 text-white"
@@ -213,6 +218,33 @@ export default function AdminDashboard() {
                 ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {!loading && data.length > 0 && (
+        <div className="mt-4 flex items-center justify-between text-sm text-white/60">
+          <span>
+            {total} {t.pagination.entries}
+          </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1}
+              className="rounded-lg border border-white/10 px-3 py-1.5 transition-colors hover:text-white disabled:opacity-30 disabled:hover:text-white/60"
+            >
+              {t.pagination.previous}
+            </button>
+            <span>
+              {t.pagination.page} {page} {t.pagination.of} {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page >= totalPages}
+              className="rounded-lg border border-white/10 px-3 py-1.5 transition-colors hover:text-white disabled:opacity-30 disabled:hover:text-white/60"
+            >
+              {t.pagination.next}
+            </button>
+          </div>
         </div>
       )}
     </div>

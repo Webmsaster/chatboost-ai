@@ -15,21 +15,27 @@ export async function GET(request: NextRequest) {
 
   const sql = getDb();
   const tab = request.nextUrl.searchParams.get("tab") || "orders";
+  const page = Math.max(1, parseInt(request.nextUrl.searchParams.get("page") || "1", 10));
+  const limit = Math.min(100, Math.max(1, parseInt(request.nextUrl.searchParams.get("limit") || "20", 10)));
+  const offset = (page - 1) * limit;
 
   try {
     if (tab === "orders") {
-      const rows = await sql`SELECT * FROM orders ORDER BY created_at DESC LIMIT 100`;
-      return NextResponse.json({ data: rows });
+      const [{ count }] = await sql`SELECT COUNT(*) as count FROM orders`;
+      const rows = await sql`SELECT * FROM orders ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+      return NextResponse.json({ data: rows, total: Number(count), page, limit });
     }
 
     if (tab === "contacts") {
-      const rows = await sql`SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT 100`;
-      return NextResponse.json({ data: rows });
+      const [{ count }] = await sql`SELECT COUNT(*) as count FROM contact_submissions`;
+      const rows = await sql`SELECT * FROM contact_submissions ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+      return NextResponse.json({ data: rows, total: Number(count), page, limit });
     }
 
     if (tab === "subscribers") {
-      const rows = await sql`SELECT * FROM newsletter_subscribers WHERE unsubscribed_at IS NULL ORDER BY subscribed_at DESC LIMIT 100`;
-      return NextResponse.json({ data: rows });
+      const [{ count }] = await sql`SELECT COUNT(*) as count FROM newsletter_subscribers WHERE unsubscribed_at IS NULL`;
+      const rows = await sql`SELECT * FROM newsletter_subscribers WHERE unsubscribed_at IS NULL ORDER BY subscribed_at DESC LIMIT ${limit} OFFSET ${offset}`;
+      return NextResponse.json({ data: rows, total: Number(count), page, limit });
     }
 
     if (tab === "summary") {

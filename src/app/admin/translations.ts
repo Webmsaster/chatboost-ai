@@ -34,6 +34,13 @@ const translations = {
         message: "Nachricht",
         subscribedAt: "Angemeldet am",
       },
+      pagination: {
+        previous: "Zurück",
+        next: "Weiter",
+        page: "Seite",
+        of: "von",
+        entries: "Einträge",
+      },
     },
   },
   en: {
@@ -70,6 +77,13 @@ const translations = {
         industry: "Industry",
         message: "Message",
         subscribedAt: "Subscribed at",
+      },
+      pagination: {
+        previous: "Previous",
+        next: "Next",
+        page: "Page",
+        of: "of",
+        entries: "entries",
       },
     },
   },
