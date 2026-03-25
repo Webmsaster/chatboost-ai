@@ -5,7 +5,7 @@ import { getClientIp } from "@/lib/api-guard";
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
-  const { success } = rateLimit(`admin-login:${ip}`, { max: 5, windowMs: 300_000 });
+  const { success } = await rateLimit(`admin-login:${ip}`, { max: 5, windowMs: 300_000 });
   if (!success) {
     return NextResponse.json({ error: "Too many attempts" }, { status: 429 });
   }

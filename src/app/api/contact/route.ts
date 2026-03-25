@@ -6,7 +6,7 @@ import { sendNewContactNotification } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
-  const { success } = rateLimit(`contact:${ip}`, { max: 3, windowMs: 60_000 });
+  const { success } = await rateLimit(`contact:${ip}`, { max: 3, windowMs: 60_000 });
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }

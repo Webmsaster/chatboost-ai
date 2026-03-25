@@ -5,7 +5,7 @@ import { getDb } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
-  const { success } = rateLimit(`newsletter:${ip}`, { max: 5, windowMs: 60_000 });
+  const { success } = await rateLimit(`newsletter:${ip}`, { max: 5, windowMs: 60_000 });
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }

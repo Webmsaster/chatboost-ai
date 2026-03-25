@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
   // IP-based rate limiting: 5 checkout attempts per minute
   const ip = getClientIp(request);
-  const { success } = rateLimit(`checkout:${ip}`, { max: 5, windowMs: 60_000 });
+  const { success } = await rateLimit(`checkout:${ip}`, { max: 5, windowMs: 60_000 });
   if (!success) {
     return NextResponse.json(
       { error: "Too many requests" },
