@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminToken, COOKIE_NAME } from "@/lib/admin-auth";
-import { getDb } from "@/lib/db";
+import { getDb } from "@/db/client";
 
 async function checkAuth(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get(COOKIE_NAME)?.value;

@@ -1,9 +1,2 @@
-import { neon } from "@neondatabase/serverless";
-
-export function getDb() {
-  const databaseUrl = process.env.DATABASE_URL;
-  if (!databaseUrl) {
-    throw new Error("DATABASE_URL is not configured");
-  }
-  return neon(databaseUrl);
-}
+// Re-export from the central db client for backwards compatibility
+export { getDb } from "@/db/client";

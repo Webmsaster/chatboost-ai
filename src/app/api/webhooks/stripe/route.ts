@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { getDb } from "@/lib/db";
+import { getDb } from "@/db/client";
 import { sendOrderConfirmation } from "@/lib/email";
 
 export async function POST(request: NextRequest) {

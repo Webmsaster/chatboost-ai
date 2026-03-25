@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/api-guard";
-import { getDb } from "@/lib/db";
+import { getDb } from "@/db/client";
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
