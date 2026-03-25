@@ -16,36 +16,20 @@ export default function NewsletterSignup({ variant = "inline" }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
-  const FORMSPREE_URL = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
     setIsLoading(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.set("email", email);
-    formData.set("_type", "newsletter");
-    formData.set("_subject", "New Newsletter Signup");
-
     try {
-      const results = await Promise.allSettled([
-        FORMSPREE_URL
-          ? fetch(FORMSPREE_URL, { method: "POST", body: formData, headers: { Accept: "application/json" } })
-          : Promise.resolve(null),
-        fetch("/api/newsletter", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        }),
-      ]);
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-      const formspreeOk = results[0].status === "fulfilled" && (results[0].value === null || results[0].value.ok);
-      const dbOk = results[1].status === "fulfilled" && results[1].value.ok;
-
-      if (formspreeOk || dbOk) {
+      if (res.ok) {
         setSubmitted(true);
         setEmail("");
       } else {

@@ -13,42 +13,27 @@ export default function Contact() {
   const [error, setError] = useState<string | null>(null);
   const t = useTranslations("Contact");
 
-  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
-  const FORMSPREE_URL = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
-    if (email) formData.set("_replyto", email.toString());
 
     try {
-      const dbBody = {
-        name: formData.get("name")?.toString() || "",
-        email: formData.get("email")?.toString() || "",
-        industry: formData.get("branche")?.toString() || "",
-        website: formData.get("website")?.toString() || "",
-        message: formData.get("nachricht")?.toString() || "",
-      };
-
-      const results = await Promise.allSettled([
-        FORMSPREE_URL
-          ? fetch(FORMSPREE_URL, { method: "POST", body: formData, headers: { Accept: "application/json" } })
-          : Promise.resolve(null),
-        fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dbBody),
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name")?.toString() || "",
+          email: formData.get("email")?.toString() || "",
+          industry: formData.get("branche")?.toString() || "",
+          website: formData.get("website")?.toString() || "",
+          message: formData.get("nachricht")?.toString() || "",
         }),
-      ]);
+      });
 
-      const formspreeOk = results[0].status === "fulfilled" && (results[0].value === null || results[0].value.ok);
-      const dbOk = results[1].status === "fulfilled" && results[1].value.ok;
-
-      if (formspreeOk || dbOk) {
+      if (res.ok) {
         setSubmitted(true);
       } else {
         setError(t("formErrorGeneric"));

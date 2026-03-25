@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
         },
         {
           key: "Content-Security-Policy",
-          value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://assets.calendly.com https://js.stripe.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://plausible.io https://api.openai.com https://formspree.io https://calendly.com https://api.stripe.com; frame-src https://calendly.com https://js.stripe.com;",
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://assets.calendly.com https://js.stripe.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://plausible.io https://api.openai.com https://calendly.com https://api.stripe.com; frame-src https://calendly.com https://js.stripe.com;",
         },
       ],
     },
