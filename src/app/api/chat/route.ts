@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
   // IP-based rate limiting: 15 requests per minute
   const ip = getClientIp(request);
-  const { success } = rateLimit(`chat:${ip}`, { max: 15, windowMs: 60_000 });
+  const { success } = await rateLimit(`chat:${ip}`, { max: 15, windowMs: 60_000 });
   if (!success) {
     return NextResponse.json(
       { error: "Rate limit exceeded", rateLimited: true },
