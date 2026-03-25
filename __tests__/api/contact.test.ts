@@ -3,14 +3,14 @@ import { NextRequest } from "next/server";
 
 // Mock dependencies before importing the route
 vi.mock("@/lib/rate-limit", () => ({
-  rateLimit: vi.fn(() => ({ success: true, remaining: 5 })),
+  rateLimit: vi.fn(() => Promise.resolve({ success: true, remaining: 5 })),
 }));
 
 vi.mock("@/lib/api-guard", () => ({
   getClientIp: vi.fn(() => "127.0.0.1"),
 }));
 
-vi.mock("@/lib/db", () => ({
+vi.mock("@/db/client", () => ({
   getDb: vi.fn(() => {
     const sql = (strings: TemplateStringsArray, ..._values: unknown[]) => {
       void strings;
@@ -83,7 +83,7 @@ describe("POST /api/contact", () => {
 
   it("returns 429 when rate limited", async () => {
     const { rateLimit } = await import("@/lib/rate-limit");
-    vi.mocked(rateLimit).mockReturnValueOnce({ success: false, remaining: 0 });
+    vi.mocked(rateLimit).mockResolvedValueOnce({ success: false, remaining: 0 });
 
     const { POST } = await import("@/app/api/contact/route");
     const req = createJsonRequest({

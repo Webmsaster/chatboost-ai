@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
 vi.mock("@/lib/rate-limit", () => ({
-  rateLimit: vi.fn(() => ({ success: true, remaining: 10 })),
+  rateLimit: vi.fn(() => Promise.resolve({ success: true, remaining: 10 })),
 }));
 
 vi.mock("@/lib/api-guard", () => ({
@@ -93,7 +93,7 @@ describe("POST /api/chat", () => {
 
   it("returns 429 when rate limited", async () => {
     const { rateLimit } = await import("@/lib/rate-limit");
-    vi.mocked(rateLimit).mockReturnValueOnce({ success: false, remaining: 0 });
+    vi.mocked(rateLimit).mockResolvedValueOnce({ success: false, remaining: 0 });
 
     const { POST } = await import("@/app/api/chat/route");
     const req = createJsonRequest({
