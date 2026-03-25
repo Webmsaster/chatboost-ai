@@ -9,12 +9,13 @@ export default function NotFound() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#030014] px-6">
+      {/* Background glow effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/3 h-[400px] w-[400px] rounded-full bg-brand-600/10 blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/3 h-[300px] w-[300px] rounded-full bg-accent-500/10 blur-[100px]" />
       </div>
 
-      <div className="relative text-center">
+      <div className="relative text-center animate-[fadeInUp_0.6s_ease-out_both]">
         <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/20 to-accent-500/20 border border-white/[0.06]">
           <MessageCircle className="h-10 w-10 text-brand-400" />
         </div>
@@ -29,7 +30,7 @@ export default function NotFound() {
           {t("description")}
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-[fadeInUp_0.6s_ease-out_0.2s_both]">
           <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-all hover:shadow-brand-500/40 hover:brightness-110"
@@ -45,7 +46,7 @@ export default function NotFound() {
           </Link>
         </div>
 
-        <div className="mt-16 flex items-center justify-center gap-2.5 opacity-40">
+        <div className="mt-16 flex items-center justify-center gap-2.5 opacity-40 animate-[fadeInUp_0.6s_ease-out_0.4s_both]">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-accent-500">
             <Bot className="h-4 w-4 text-white" />
           </div>
